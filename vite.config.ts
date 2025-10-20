@@ -49,6 +49,47 @@ const copyHeroImages = () => {
   };
 };
 
+// Simple category translation map between English and Somali labels used in content
+const categoryTranslateMap: Record<string, { en: string; so: string }> = {
+  Health: { en: "Health", so: "Caafimaad" },
+  Parenting: { en: "Parenting", so: "Barbaarinta Carruurta" },
+  Education: { en: "Education", so: "Waxbarasho" },
+  Quran: { en: "Quran", so: "Quraanka" },
+  "Baby Names": { en: "Baby Names", so: "Magacyada Carruurta" },
+  // Somali to English direct keys (for when source is Somali)
+  "Caafimaad": { en: "Health", so: "Caafimaad" },
+  "Barbaarinta Carruurta": { en: "Parenting", so: "Barbaarinta Carruurta" },
+  "Waxbarasho": { en: "Education", so: "Waxbarasho" },
+  "Quraanka": { en: "Quran", so: "Quraanka" },
+  "Magacyada Carruurta": { en: "Baby Names", so: "Magacyada Carruurta" },
+};
+
+// Very small in-memory translation cache for build step
+const translationCache = new Map<string, string>();
+
+// LibreTranslate helper (uses public endpoint; best-effort, no API key)
+async function translateText(text: string, source: 'en' | 'so', target: 'en' | 'so'): Promise<string> {
+  if (!text || source === target) return text;
+  const key = `${source}:${target}:${text}`;
+  const cached = translationCache.get(key);
+  if (cached) return cached;
+  try {
+    const endpoint = process.env.LIBRE_TRANSLATE_ENDPOINT || 'https://libretranslate.de/translate';
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ q: text, source, target, format: 'text' })
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json: any = await res.json();
+    const translated = (json?.translatedText as string) ?? text;
+    translationCache.set(key, translated);
+    return translated;
+  } catch {
+    return text; // graceful fallback on any failure
+  }
+}
+
 // Plugin to generate a JSON feed of blog posts at build time as a fallback
 const generatePostsJson = () => {
   const blogDir = path.resolve(__dirname, 'src/content/blog');
@@ -73,15 +114,14 @@ const generatePostsJson = () => {
 
   return {
     name: 'generate-posts-json',
-    writeBundle() {
+    async writeBundle() {
       try {
         const files = listMarkdownFiles(blogDir);
-        const posts = files.map((file) => {
+        // First pass: collect originals with raw markdown
+        const originals = files.map((file) => {
           const raw = readFileSync(file, 'utf8');
           const { content, data } = matter(raw);
-          const html = marked.parse(content) as string;
           const slug = toSlug(file);
-          // Infer language if missing using filename suffix and Somali category labels
           const base = path.basename(file).replace(/\.md$/, '');
           const hasSomaliFilename = /(^|-)so$/i.test(base);
           const categoryValue = (data as any).category as string | undefined;
@@ -92,28 +132,95 @@ const generatePostsJson = () => {
             'Quraanka',
             'Magacyada Carruurta',
           ].some(label => (categoryValue ?? '').toLowerCase() === label.toLowerCase());
-          
-          // Check for Somali content indicators in title and content
           const title = (data as any).title as string | undefined ?? "";
-          const postContent = content;
-          const hasSomaliContent = /[ء-ي]/.test(title + postContent) || // Arabic/Somali script
-            /(hooyo|aabo|waxbarasho|caafimaad|qoys|carruur|islaam|quraan)/i.test(title + postContent);
-          
+          const hasSomaliContent = /[ء-ي]/.test(title + content) || /(hooyo|aabo|waxbarasho|caafimaad|qoys|carruur|islaam|quraan)/i.test(title + content);
           const inferredLanguage = (data as any).language ?? (hasSomaliFilename || isSomaliCategory || hasSomaliContent ? 'so' : 'en');
           return {
-            title: data.title,
-            date: data.date,
-            image: data.image,
-            category: data.category,
-            excerpt: data.excerpt,
-            author: data.author ?? 'Miftah Som Academy',
-            readTime: data.readTime ?? '5 min read',
-            language: inferredLanguage,
+            title: (data as any).title as string | undefined,
+            date: (data as any).date,
+            image: (data as any).image,
+            category: (data as any).category,
+            excerpt: (data as any).excerpt,
+            author: (data as any).author ?? 'Miftah Som Academy',
+            readTime: (data as any).readTime ?? '5 min read',
+            language: inferredLanguage as 'en' | 'so',
             slug,
-            html,
+            rawContent: content,
+          } as {
+            title?: string; date?: string; image?: string; category?: string; excerpt?: string; author?: string; readTime?: string; language: 'en' | 'so'; slug: string; rawContent: string;
           };
         });
-        posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+        // Optionally auto-translate to ensure both languages exist per slug
+        // Enable auto-translation by default for smooth operation unless explicitly disabled
+        const autoTranslateEnabled = (process.env.AUTO_TRANSLATE || 'true').toLowerCase() === 'true';
+        const bySlug = new Map<string, { en?: typeof originals[0]; so?: typeof originals[0] }>();
+        for (const p of originals) {
+          const entry = bySlug.get(p.slug) || {};
+          entry[p.language] = p as any;
+          bySlug.set(p.slug, entry);
+        }
+
+        const enriched: Array<{ title?: string; date?: string; image?: string; category?: string; excerpt?: string; author?: string; readTime?: string; language: 'en' | 'so'; slug: string; rawContent: string; }> = [];
+        for (const [slug, languages] of bySlug.entries()) {
+          if (languages.en) enriched.push(languages.en);
+          if (languages.so) enriched.push(languages.so);
+          if (!autoTranslateEnabled) continue;
+          if (!languages.en && languages.so) {
+            const src = languages.so;
+            const title = await translateText(src.title || slug, 'so', 'en');
+            const excerpt = src.excerpt ? await translateText(src.excerpt, 'so', 'en') : '';
+            const bodyMd = await translateText(src.rawContent, 'so', 'en');
+            const category = src.category ? (categoryTranslateMap[src.category]?.en || src.category) : undefined;
+            enriched.push({
+              title,
+              date: src.date,
+              image: src.image,
+              category,
+              excerpt,
+              author: src.author,
+              readTime: src.readTime,
+              language: 'en',
+              slug,
+              rawContent: bodyMd,
+            });
+          }
+          if (!languages.so && languages.en) {
+            const src = languages.en;
+            const title = await translateText(src.title || slug, 'en', 'so');
+            const excerpt = src.excerpt ? await translateText(src.excerpt, 'en', 'so') : '';
+            const bodyMd = await translateText(src.rawContent, 'en', 'so');
+            const category = src.category ? (categoryTranslateMap[src.category]?.so || src.category) : undefined;
+            enriched.push({
+              title,
+              date: src.date,
+              image: src.image,
+              category,
+              excerpt,
+              author: src.author,
+              readTime: src.readTime,
+              language: 'so',
+              slug,
+              rawContent: bodyMd,
+            });
+          }
+        }
+
+        // Convert all to final JSON structure (with rendered HTML)
+        const posts = enriched.map((p) => ({
+          title: p.title,
+          date: p.date,
+          image: p.image,
+          category: p.category,
+          excerpt: p.excerpt,
+          author: p.author,
+          readTime: p.readTime,
+          language: p.language,
+          slug: p.slug,
+          html: marked.parse(p.rawContent) as string,
+        }));
+
+        posts.sort((a, b) => new Date(b.date as any).getTime() - new Date(a.date as any).getTime());
 
         const distDir = path.resolve(__dirname, 'dist');
         if (!existsSync(distDir)) {
