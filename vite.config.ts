@@ -67,26 +67,64 @@ const categoryTranslateMap: Record<string, { en: string; so: string }> = {
 // Very small in-memory translation cache for build step
 const translationCache = new Map<string, string>();
 
-// LibreTranslate helper (uses public endpoint; best-effort, no API key)
+// Clean Microsoft Word HTML artifacts from content
+function cleanWordArtifacts(text: string): string {
+  return text
+    .replace(/<!--\\[if[^>]*>[\s\S]*?<!\\[endif]-->/g, '') // Remove Word conditional comments
+    .replace(/<w:[^>]*>/g, '') // Remove Word XML tags
+    .replace(/<m:[^>]*>/g, '') // Remove Word math tags
+    .replace(/<o:[^>]*>/g, '') // Remove Word object tags
+    .replace(/<v:[^>]*>/g, '') // Remove Word VML tags
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/g, '') // Remove style blocks
+    .replace(/<xml[^>]*>[\s\S]*?<\/xml>/g, '') // Remove XML blocks
+    .replace(/\\[if[^>]*>[\s\S]*?\\[endif]/g, '') // Remove escaped conditionals
+    .replace(/\\[endif]/g, '') // Remove escaped endif
+    .replace(/\\[if[^>]*>/g, '') // Remove escaped if
+    .trim();
+}
+
+// MyMemory API helper (free, no API key required)
 async function translateText(text: string, source: 'en' | 'so', target: 'en' | 'so'): Promise<string> {
   if (!text || source === target) return text;
   const key = `${source}:${target}:${text}`;
   const cached = translationCache.get(key);
   if (cached) return cached;
+  
+  // Clean the text first
+  const cleanText = cleanWordArtifacts(text);
+  if (!cleanText.trim()) return text;
+  
   try {
-    const endpoint = process.env.LIBRE_TRANSLATE_ENDPOINT || 'https://libretranslate.de/translate';
-    const res = await fetch(endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ q: text, source, target, format: 'text' })
-    });
+    // Use MyMemory API (free, no key required)
+    const sourceLang = source === 'so' ? 'so' : 'en';
+    const targetLang = target === 'so' ? 'so' : 'en';
+    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(cleanText)}&langpair=${sourceLang}|${targetLang}`;
+    
+    const res = await fetch(url);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const json: any = await res.json();
-    const translated = (json?.translatedText as string) ?? text;
-    translationCache.set(key, translated);
-    return translated;
+    
+    if (json.responseStatus === 200 && json.responseData?.translatedText) {
+      const translated = json.responseData.translatedText;
+      translationCache.set(key, translated);
+      return translated;
+    }
+    
+    // Fallback: try Google Translate (free tier)
+    const googleUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&q=${encodeURIComponent(cleanText)}`;
+    const googleRes = await fetch(googleUrl);
+    if (googleRes.ok) {
+      const googleJson: any = await googleRes.json();
+      if (googleJson[0] && googleJson[0][0] && googleJson[0][0][0]) {
+        const translated = googleJson[0][0][0];
+        translationCache.set(key, translated);
+        return translated;
+      }
+    }
+    
+    return cleanText; // Return cleaned text if translation fails
   } catch {
-    return text; // graceful fallback on any failure
+    return cleanText; // Return cleaned text on any failure
   }
 }
 
@@ -135,17 +173,23 @@ const generatePostsJson = () => {
           const title = (data as any).title as string | undefined ?? "";
           const hasSomaliContent = /[ء-ي]/.test(title + content) || /(hooyo|aabo|waxbarasho|caafimaad|qoys|carruur|islaam|quraan)/i.test(title + content);
           const inferredLanguage = (data as any).language ?? (hasSomaliFilename || isSomaliCategory || hasSomaliContent ? 'so' : 'en');
+          
+          // Clean Word artifacts from content
+          const cleanContent = cleanWordArtifacts(content);
+          const cleanTitle = cleanWordArtifacts(title);
+          const cleanExcerpt = cleanWordArtifacts((data as any).excerpt || '');
+          
           return {
-            title: (data as any).title as string | undefined,
+            title: cleanTitle,
             date: (data as any).date,
             image: (data as any).image,
             category: (data as any).category,
-            excerpt: (data as any).excerpt,
+            excerpt: cleanExcerpt,
             author: (data as any).author ?? 'Miftah Som Academy',
             readTime: (data as any).readTime ?? '5 min read',
             language: inferredLanguage as 'en' | 'so',
             slug,
-            rawContent: content,
+            rawContent: cleanContent,
           } as {
             title?: string; date?: string; image?: string; category?: string; excerpt?: string; author?: string; readTime?: string; language: 'en' | 'so'; slug: string; rawContent: string;
           };
