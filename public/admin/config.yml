@@ -1,0 +1,80 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to master)
+
+media_folder: "public/images" # Media files will be stored in the repo under public/images
+public_folder: "/images" # The src attribute for uploaded media will begin with /images
+
+# Enable previews
+display_url: https://miftahsom.com
+
+collections:
+  - name: "blog" # Used in routes, e.g., /admin/collections/blog
+    label: "Blog Posts" # Used in the UI
+    folder: "src/content/blog" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Featured Image", name: "image", widget: "image"}
+      - {label: "Category", name: "category", widget: "select", options: ["Health", "Parenting", "Baby Names", "Education", "Quran"]}
+      - {label: "Excerpt", name: "excerpt", widget: "text"}
+      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Author", name: "author", widget: "string", default: "Dr. Amina Hassan"}
+      - {label: "Read Time", name: "readTime", widget: "string", default: "5 min read"}
+      - {label: "Language", name: "language", widget: "select", options: ["en", "so"], default: "en"}
+
+  - name: "pages" # Used in routes, e.g., /admin/collections/pages
+    label: "Pages" # Used in the UI
+    files: # The files for this collection
+      - label: "Home Page"
+        name: "home"
+        file: "src/content/pages/home.md"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "description", widget: "text"}
+          - {label: "Hero Title", name: "heroTitle", widget: "string"}
+          - {label: "Hero Excerpt", name: "heroExcerpt", widget: "text"}
+          - {label: "Hero Image", name: "heroImage", widget: "image"}
+      - label: "About Page"
+        name: "about"
+        file: "src/content/pages/about.md"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Body", name: "body", widget: "markdown"}
+      - label: "Contact Page"
+        name: "contact"
+        file: "src/content/pages/contact.md"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Body", name: "body", widget: "markdown"}
+      - label: "Privacy Policy"
+        name: "privacy"
+        file: "src/content/pages/privacy.md"
+        fields:
+          - {label: "Title", name: "title", widget: "string", default: "Privacy Policy"}
+          - {label: "Body", name: "body", widget: "markdown"}
+      - label: "Terms of Service"
+        name: "terms"
+        file: "src/content/pages/terms.md"
+        fields:
+          - {label: "Title", name: "title", widget: "string", default: "Terms of Service"}
+          - {label: "Body", name: "body", widget: "markdown"}
+      - label: "Cookie Policy"
+        name: "cookies"
+        file: "src/content/pages/cookies.md"
+        fields:
+          - {label: "Title", name: "title", widget: "string", default: "Cookie Policy"}
+          - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "categories"
+    label: "Categories"
+    folder: "src/content/categories"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Image", name: "image", widget: "image"}
+      - {label: "Color", name: "color", widget: "color"}
