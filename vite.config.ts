@@ -95,9 +95,9 @@ const generatePostsJson = () => {
           
           // Check for Somali content indicators in title and content
           const title = (data as any).title as string | undefined ?? "";
-          const content = parsed.content;
-          const hasSomaliContent = /[ء-ي]/.test(title + content) || // Arabic/Somali script
-            /(hooyo|aabo|waxbarasho|caafimaad|qoys|carruur|islaam|quraan)/i.test(title + content);
+          const postContent = content;
+          const hasSomaliContent = /[ء-ي]/.test(title + postContent) || // Arabic/Somali script
+            /(hooyo|aabo|waxbarasho|caafimaad|qoys|carruur|islaam|quraan)/i.test(title + postContent);
           
           const inferredLanguage = (data as any).language ?? (hasSomaliFilename || isSomaliCategory || hasSomaliContent ? 'so' : 'en');
           return {
