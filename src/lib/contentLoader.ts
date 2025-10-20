@@ -88,14 +88,21 @@ export const loadBlogPosts = async (language: string = 'en'): Promise<BlogPost[]
           const categoryValue = (data.category as string | undefined) ?? "General";
           const isSomaliCategory = [
             "Caafimaad",
-            "Barbaarinta Carruurta",
+            "Barbaarinta Carruurta", 
             "Waxbarasho",
             "Quraanka",
             "Magacyada Carruurta",
           ].some(label => label.toLowerCase() === categoryValue.toLowerCase());
           const hasSomaliFilename = /(^|-)so$/i.test(withoutExt);
+          
+          // Check for Somali content indicators in title and content
+          const title = (data.title as string | undefined) ?? "";
+          const content = parsed.content;
+          const hasSomaliContent = /[ء-ي]/.test(title + content) || // Arabic/Somali script
+            /(hooyo|aabo|waxbarasho|caafimaad|qoys|carruur|islaam|quraan)/i.test(title + content);
+          
           const inferredLanguage = (data as { language?: string } | undefined)?.language
-            ?? (hasSomaliFilename || isSomaliCategory ? "so" : "en");
+            ?? (hasSomaliFilename || isSomaliCategory || hasSomaliContent ? "so" : "en");
 
           const post = {
             title: data.title ?? slug,

@@ -92,7 +92,14 @@ const generatePostsJson = () => {
             'Quraanka',
             'Magacyada Carruurta',
           ].some(label => (categoryValue ?? '').toLowerCase() === label.toLowerCase());
-          const inferredLanguage = (data as any).language ?? (hasSomaliFilename || isSomaliCategory ? 'so' : 'en');
+          
+          // Check for Somali content indicators in title and content
+          const title = (data as any).title as string | undefined ?? "";
+          const content = parsed.content;
+          const hasSomaliContent = /[ء-ي]/.test(title + content) || // Arabic/Somali script
+            /(hooyo|aabo|waxbarasho|caafimaad|qoys|carruur|islaam|quraan)/i.test(title + content);
+          
+          const inferredLanguage = (data as any).language ?? (hasSomaliFilename || isSomaliCategory || hasSomaliContent ? 'so' : 'en');
           return {
             title: data.title,
             date: data.date,
