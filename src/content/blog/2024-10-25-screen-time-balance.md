@@ -1,12 +1,13 @@
 ---
 title: "Balancing Screen Time: Raising Digital-Native Children"
 date: 2024-10-25T15:30:00.000Z
-image: "/images/hero-parenting.jpg"
-category: "Parenting"
-excerpt: "Navigate the digital age with your children by finding healthy balance between screen time and real-world experiences."
-author: "Mr. Mifta"
-readTime: "8 min read"
-language: "en"
+image: /images/35.jpg
+category: Parenting
+excerpt: Navigate the digital age with your children by finding healthy balance
+  between screen time and real-world experiences.
+author: P. A. Mr. Sadik Sheikh Mohamed
+readTime: 8 min read
+language: so
 ---
 
 # Balancing Screen Time: Raising Digital-Native Children
