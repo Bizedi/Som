@@ -15,7 +15,7 @@ excerpt: >-
   Wicid iyo WhatsApp: +252616639802
 author: "P. A. Mr: Sadik Mohamed"
 readTime: 5 min read
-language: en
+language: so
 ---
 Waxaan idiin haynaa sawiradaas iyo kaloo badan. waxaa kaloo inoo soo socda buugaagtii sheekooyinka ee caruurta, kuwaasoo baahi weyn ay uqabaan waalidiinta Soomaaliyeed.
 Nagala Soo Xiriir:-
