@@ -24,11 +24,16 @@ const translations = {
     'common.switch-to-somali': 'Switch to Somali',
     'common.switch-to-english': 'Switch to English',
     'common.subscribe': 'Subscribe',
+    'common.subscribing': 'Subscribing...',
     'common.email-placeholder': 'Enter your email',
     'common.popular-articles': 'Popular Articles',
     'common.categories': 'Categories',
     'common.stay-updated': 'Stay Updated',
     'common.newsletter-description': 'Get the latest health, parenting, and educational insights delivered to your inbox.',
+    'common.subscribe-success': 'Success!',
+    'common.subscribe-success-desc': 'Thank you for subscribing! We\'ll keep you updated with our latest content.',
+    'common.subscribe-error': 'Error',
+    'common.subscribe-error-desc': 'Something went wrong. Please try again later.',
     
     // Hero Section
     'hero.main-title': 'Essential Nutrition Guide: Building Healthy Eating Habits for the Whole Family',
@@ -140,11 +145,16 @@ const translations = {
     'common.switch-to-somali': 'U bedel Soomaali',
     'common.switch-to-english': 'U bedel Ingiriis',
     'common.subscribe': 'Qor',
+    'common.subscribing': 'Waa la qorayaa...',
     'common.email-placeholder': 'Geli iimaylkaaga',
     'common.popular-articles': 'Maqaallo Caanka ah',
     'common.categories': 'Qaybaha',
     'common.stay-updated': 'La soco',
     'common.newsletter-description': 'Hel macluumaadka ugu dambeeya ee caafimaadka, barbaarinta, iyo waxbarashada oo la soo dirayo sanduuqaaga.',
+    'common.subscribe-success': 'Guul!',
+    'common.subscribe-success-desc': 'Waad ku mahadsan tahay qorashadaada! Waxaan kugu soo diri doonnaa macluumaadka ugu dambeeya.',
+    'common.subscribe-error': 'Qalad',
+    'common.subscribe-error-desc': 'Wax qalad ayaa dhacay. Fadlan mar kale isku day.',
     
     // Hero Section
     'hero.main-title': 'Hagaha Caafimaadka: Dhiska Caadada Cuntada Caafimaadka ee Qoyska',

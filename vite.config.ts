@@ -128,6 +128,59 @@ async function translateText(text: string, source: 'en' | 'so', target: 'en' | '
   }
 }
 
+// Plugin to generate a JSON feed of pages at build time and dev server start
+const generatePagesJson = () => {
+  const pagesDir = path.resolve(__dirname, 'src/content/pages');
+
+  const generatePages = (outputDir: string) => {
+    try {
+      if (!existsSync(pagesDir)) {
+        return;
+      }
+
+      const files = readdirSync(pagesDir).filter(f => f.endsWith('.md') && f !== 'home.md');
+      const pages: Array<{ slug: string; title: string; html: string }> = [];
+
+      for (const file of files) {
+        const filePath = path.join(pagesDir, file);
+        const raw = readFileSync(filePath, 'utf8');
+        const { content, data } = matter(raw);
+        const slug = file.replace(/\.md$/, '');
+
+        pages.push({
+          slug,
+          title: (data as any).title || slug.charAt(0).toUpperCase() + slug.slice(1),
+          html: marked.parse(cleanWordArtifacts(content)) as string,
+        });
+      }
+
+      if (!existsSync(outputDir)) {
+        mkdirSync(outputDir, { recursive: true });
+      }
+      writeFileSync(path.join(outputDir, 'pages.json'), JSON.stringify(pages, null, 2), 'utf8');
+      // eslint-disable-next-line no-console
+      console.log(`[generate-pages-json] Wrote ${pages.length} pages to ${path.join(outputDir, 'pages.json')}`);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('[generate-pages-json] Failed to generate pages.json', err);
+    }
+  };
+
+  return {
+    name: 'generate-pages-json',
+    buildStart() {
+      // Generate for dev server (in public directory so it's served)
+      const publicDir = path.resolve(__dirname, 'public');
+      generatePages(publicDir);
+    },
+    async writeBundle() {
+      // Generate for production build (in dist directory)
+      const distDir = path.resolve(__dirname, 'dist');
+      generatePages(distDir);
+    }
+  };
+};
+
 // Plugin to generate a JSON feed of blog posts at build time as a fallback
 const generatePostsJson = () => {
   const blogDir = path.resolve(__dirname, 'src/content/blog');
@@ -292,6 +345,7 @@ export default defineConfig(({ mode }) => ({
     mode === "development" && componentTagger(),
     copyAdminFiles(),
     copyHeroImages(),
+    generatePagesJson(),
     generatePostsJson()
   ].filter(Boolean),
   resolve: {

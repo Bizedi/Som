@@ -113,7 +113,7 @@ const Header = () => {
               className="sm:hidden h-8 w-auto object-contain"
               loading="eager"
             />
-			<span className="ml-3 text-base sm:text-lg font-semibold text-foreground whitespace-nowrap">Mifta Som Academy</span>
+			<span className="ml-3 text-base sm:text-lg font-semibold text-foreground whitespace-nowrap">Miftah Som Academy</span>
             <span className="sr-only">Miftah Som Academy</span>
           </Link>
 

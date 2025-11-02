@@ -1,12 +1,17 @@
+import { useState } from 'react';
 import { Mail, TrendingUp, BookOpen, Heart, GraduationCap, Bookmark } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroParentingImage from '@/assets/hero-parenting.jpg';
 import heroQuranImage from '@/assets/hero-quran.jpg';
 import heroBabyNamesImage from '@/assets/hero-baby-names.jpg';
 import { useTranslation } from '@/contexts/TranslationContext';
+import { useToast } from '@/hooks/use-toast';
 
 const Sidebar = () => {
   const { t } = useTranslation();
+  const { toast } = useToast();
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const popularPosts = [
     {
@@ -106,17 +111,67 @@ const Sidebar = () => {
         <p className="text-sm opacity-90 mb-4">
           {t('common.newsletter-description')}
         </p>
-        <form className="space-y-3">
+        <form 
+          name="newsletter" 
+          method="POST" 
+          data-netlify="true" 
+          netlify-honeypot="bot-field"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            setIsSubmitting(true);
+            
+            const formData = new FormData(e.currentTarget);
+            formData.append('form-name', 'newsletter');
+            
+            try {
+              const response = await fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData as any).toString(),
+              });
+              
+              if (response.ok) {
+                toast({
+                  title: t('common.subscribe-success') || 'Success!',
+                  description: t('common.subscribe-success-desc') || 'Thank you for subscribing!',
+                });
+                setEmail('');
+              } else {
+                throw new Error('Submission failed');
+              }
+            } catch (error) {
+              toast({
+                title: t('common.subscribe-error') || 'Error',
+                description: t('common.subscribe-error-desc') || 'Something went wrong. Please try again.',
+                variant: 'destructive',
+              });
+            } finally {
+              setIsSubmitting(false);
+            }
+          }}
+          className="space-y-3"
+        >
+          <input type="hidden" name="form-name" value="newsletter" />
+          <p className="hidden">
+            <label>
+              Don't fill this out if you're human: <input name="bot-field" />
+            </label>
+          </p>
           <input
             type="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder={t('common.email-placeholder')}
+            required
             className="w-full px-3 py-2 rounded text-card-foreground text-sm focus:outline-none focus:ring-2 focus:ring-white/30"
           />
           <button
             type="submit"
-            className="w-full bg-white text-aljazeera-blue py-2 rounded text-sm font-medium hover:bg-gray-100 transition-colors"
+            disabled={isSubmitting}
+            className="w-full bg-white text-aljazeera-blue py-2 rounded text-sm font-medium hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {t('common.subscribe')}
+            {isSubmitting ? (t('common.subscribing') || 'Subscribing...') : t('common.subscribe')}
           </button>
         </form>
       </div>
