@@ -2,7 +2,7 @@
 title: Wargelin Muhiim ah
 date: 2025-11-03T08:07:53.203Z
 image: /images/miftah-online-logos-jpg.jpg
-category: Education
+category: Parenting
 excerpt: |
   Wargelin Muhiim ah
 author: P. A. Mr. Sadik Mohamed
