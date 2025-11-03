@@ -59,4 +59,4 @@ These Terms of Service are governed by and construed in accordance with applicab
 
 ### Contact Information
 
-If you have questions about these Terms of Service, please contact us at sadikmo2016@gmail.com.
+If you have questions about these Terms of Service, please contact us at miftahsom@gmail.com.

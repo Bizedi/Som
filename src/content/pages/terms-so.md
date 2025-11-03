@@ -59,5 +59,5 @@ Shuruudahan Adeegga waxaa maamulaya oo lagu qeexay iyadoo la raacayo sharciyada 
 
 ### Macluumaadka Xidhiidhka
 
-Haddii aad su'aalo ka qabto shuruudahan Adeegga, fadlan nala soo xidhiidh sadikmo2016@gmail.com.
+Haddii aad su'aalo ka qabto shuruudahan Adeegga, fadlan nala soo xidhiidh miftahsom@gmail.com.
 

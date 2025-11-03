@@ -57,5 +57,5 @@ Waxaan cusbooneysiin karnaa siyaasaddan sirta waqti kasta. Waxaan kugu ogeysiine
 
 ### La Soo Xidhiidh
 
-Haddii aad su'aalo ka qabto siyaasaddan sirta ama dhaqamadeena macluumaadka, fadlan nala soo xidhiidh sadikmo2016@gmail.com.
+Haddii aad su'aalo ka qabto siyaasaddan sirta ama dhaqamadeena macluumaadka, fadlan nala soo xidhiidh miftahsom@gmail.com.
 

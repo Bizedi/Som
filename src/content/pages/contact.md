@@ -8,7 +8,7 @@ We'd love to hear from you! Whether you have questions, feedback, suggestions, o
 
 ### Contact Information
 
-**Email**: sadikmo2016@gmail.com
+**Email**: miftahsom@gmail.com
 
 **Phone**:
 - +252907756127

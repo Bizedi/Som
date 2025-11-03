@@ -57,4 +57,4 @@ Our goal is to maintain a positive environment, and we reserve the right to take
 
 Thank you for helping us build and maintain a supportive, respectful, and enriching community. Your participation and adherence to these guidelines make Miftah Som Academy a valuable resource for families everywhere.
 
-If you have questions about these guidelines, please contact us at sadikmo2016@gmail.com.
+If you have questions about these guidelines, please contact us at miftahsom@gmail.com.

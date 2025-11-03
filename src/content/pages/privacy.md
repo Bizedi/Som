@@ -57,4 +57,4 @@ We may update this Privacy Policy from time to time. We will notify you of any c
 
 ### Contact Us
 
-If you have questions about this Privacy Policy or our data practices, please contact us at sadikmo2016@gmail.com.
+If you have questions about this Privacy Policy or our data practices, please contact us at miftahsom@gmail.com.

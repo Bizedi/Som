@@ -8,7 +8,7 @@ Waxaan jeclaan lahayn inaad nala soo xidhiidhid! Haddii aad su'aalo, aragti, tal
 
 ### Macluumaadka Xidhiidhka
 
-**Iimaylka**: sadikmo2016@gmail.com
+**Iimaylka**: miftahsom@gmail.com
 
 **Telefoonka**:
 - +252907756127

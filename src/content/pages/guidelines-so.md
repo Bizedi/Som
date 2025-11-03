@@ -57,5 +57,5 @@ Ujeeddu waa inaan si wanaagsan u ilaalino jawiga, waxaan ilaalinaynaa xuquuqda i
 
 Waad ku mahadsan tahay ka caawinta inaan dhisno iyo inaan sii wadno bulsho taageeraysa, ixtiraamaysa, iyo hormarinta. Ka qayb qaadiskaaga iyo raacidkaada hagahan waxay ka dhigtay Miftah Som Academy ilaha qiimo leh ee qoysaska meel kasta.
 
-Haddii aad su'aalo ka qabto hagahan, fadlan nala soo xidhiidh sadikmo2016@gmail.com.
+Haddii aad su'aalo ka qabto hagahan, fadlan nala soo xidhiidh miftahsom@gmail.com.
 
