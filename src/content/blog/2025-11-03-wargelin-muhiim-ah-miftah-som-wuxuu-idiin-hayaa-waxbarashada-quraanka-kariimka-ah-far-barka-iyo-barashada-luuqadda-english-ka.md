@@ -7,7 +7,7 @@ excerpt: |
   Wargelin Muhiim ah
 author: P. A. Mr. Sadik Mohamed
 readTime: 5 min read
-language: en
+language: so
 ---
 <!--\[if gte mso 9]><xml>
  <o:OfficeDocumentSettings>
