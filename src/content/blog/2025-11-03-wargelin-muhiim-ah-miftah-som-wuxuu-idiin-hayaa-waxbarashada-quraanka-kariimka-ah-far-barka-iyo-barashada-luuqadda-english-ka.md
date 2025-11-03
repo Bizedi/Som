@@ -1,13 +1,10 @@
 ---
-title: Wargelin Muhiim ah Miftah Som, wuxuu idiin hayaa, waxbarashada Quraanka
-  Kariimka ah, Far-barka iyo Barashada Luuqadda English-ka.
+title: Wargelin Muhiim ah
 date: 2025-11-03T08:07:53.203Z
 image: /images/miftah-online-logos-jpg.jpg
-category: Quran
-excerpt: >
+category: Education
+excerpt: |
   Wargelin Muhiim ah
-
-  Miftah Som, wuxuu idiin hayaa, waxbarashada Quraanka Kariimka ah, Far-barka iyo Barashada Luuqadda English-ka.
 author: P. A. Mr. Sadik Mohamed
 readTime: 5 min read
 language: en
@@ -668,13 +665,11 @@ language: en
 
 <!--StartFragment-->
 
-***Wargelin Muhiim ah***
-
 **Miftah Som**, wuxuu idiin hayaa, waxbarashada **Quraanka Kariimka ah**, **Far-barka** iyo Barashada Luuqadda **English-ka**.
 
 Dhammaan qaybahan ayaa ah hab **ONLINE ah**.
 
-F.G: Tiro kooban ayaa ayay isdiiwaan-galintu ufuran tahay.
+F.G: Tiro kooban ayay isdiiwaan-galintu ufuran tahay.
 
 Wixii faah-faahin ah nagala soo xiriir:
 
