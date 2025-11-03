@@ -2,7 +2,7 @@
 
 ## 🎯 What You Want
 
-When someone subscribes → **You receive an email** at `miftahsom@gmail.com` with their email address.
+When someone subscribes → **You receive an email** at `sadikmo2016@gmail.com` with their email address.
 
 Then you can manually decide what to do with those emails.
 
@@ -20,7 +20,7 @@ Then you can manually decide what to do with those emails.
 6. **Scroll to** "Form notifications"
 7. **Click** "Add notification"
 8. **Select** "Email notification"
-9. **Enter email:** `miftahsom@gmail.com`
+9. **Enter email:** `sadikmo2016@gmail.com`
 10. **Click** "Save"
 
 **Done!** ✅
@@ -30,7 +30,7 @@ Then you can manually decide what to do with those emails.
 ## 📧 What Happens Next
 
 **Every time someone subscribes:**
-- ✅ You get an email at `miftahsom@gmail.com`
+- ✅ You get an email at `sadikmo2016@gmail.com`
 - ✅ Email contains: subscriber's email address
 - ✅ Also saved in Netlify dashboard
 
@@ -46,7 +46,7 @@ Then you can manually decide what to do with those emails.
 
 1. Go to your website
 2. Fill out the subscribe form
-3. Check `miftahsom@gmail.com` inbox
+3. Check `sadikmo2016@gmail.com` inbox
 4. You should see the notification email!
 
 ---

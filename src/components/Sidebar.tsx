@@ -114,8 +114,9 @@ const Sidebar = () => {
         <form 
           name="newsletter" 
           method="POST" 
-          data-netlify="true" 
-          netlify-honeypot="bot-field"
+          action="/"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
           onSubmit={async (e) => {
             e.preventDefault();
             setIsSubmitting(true);

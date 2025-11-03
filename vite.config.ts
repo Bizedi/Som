@@ -139,18 +139,21 @@ const generatePagesJson = () => {
       }
 
       const files = readdirSync(pagesDir).filter(f => f.endsWith('.md') && f !== 'home.md');
-      const pages: Array<{ slug: string; title: string; html: string }> = [];
+      const pages: Array<{ slug: string; title: string; html: string; language: 'en' | 'so' }> = [];
 
       for (const file of files) {
         const filePath = path.join(pagesDir, file);
         const raw = readFileSync(filePath, 'utf8');
         const { content, data } = matter(raw);
-        const slug = file.replace(/\.md$/, '');
+        const baseSlug = file.replace(/\.md$/, '').replace(/-so$/, '');
+        const isSomali = file.includes('-so.md') || (data as any).language === 'so';
+        const language: 'en' | 'so' = isSomali ? 'so' : 'en';
 
         pages.push({
-          slug,
-          title: (data as any).title || slug.charAt(0).toUpperCase() + slug.slice(1),
+          slug: baseSlug,
+          title: (data as any).title || baseSlug.charAt(0).toUpperCase() + baseSlug.slice(1),
           html: marked.parse(cleanWordArtifacts(content)) as string,
+          language,
         });
       }
 

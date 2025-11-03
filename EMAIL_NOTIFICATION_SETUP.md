@@ -40,13 +40,13 @@ If not already deployed:
 6. **Add Email Notification**
    - Click **"Add notification"**
    - Select **"Email notification"**
-   - **Enter your email address**: `miftahsom@gmail.com` (or your preferred email)
+   - **Enter your email address**: `sadikmo2016@gmail.com`
    - **Notification email template**: Choose "Default" or customize
    - Click **"Save"**
 
 7. **Test It!**
    - Have someone subscribe on your website
-   - Check your email inbox (`miftahsom@gmail.com`)
+   - Check your email inbox (`sadikmo2016@gmail.com`)
    - You should receive an email with the subscriber's email address
 
 ---
@@ -71,7 +71,7 @@ This email will contain:
 ## 🎯 How to Use This
 
 **When someone subscribes:**
-1. You receive an email at `miftahsom@gmail.com`
+1. You receive an email at `sadikmo2016@gmail.com`
 2. The email contains the subscriber's email address
 3. You can:
    - **Copy the email** to a spreadsheet
@@ -130,7 +130,7 @@ View all subscribers: [Netlify Dashboard Link]
 After setup, verify:
 - [ ] Someone subscribes on your website
 - [ ] Email notification is configured in Netlify
-- [ ] You receive email at `miftahsom@gmail.com`
+- [ ] You receive email at `sadikmo2016@gmail.com`
 - [ ] Email contains subscriber's email address
 - [ ] Submission also appears in Netlify dashboard
 

@@ -12,11 +12,12 @@ interface Page {
   slug: string;
   title: string;
   html: string;
+  language?: 'en' | 'so';
 }
 
 const Page = () => {
   const location = useLocation();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
   const [pageData, setPageData] = useState<PageData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +44,10 @@ const Page = () => {
         }
 
         const pages: Page[] = await response.json();
-        const page = pages.find(p => p.slug === slug);
+        // Find page by slug and prefer current language, fallback to any language
+        const pageForLanguage = pages.find(p => p.slug === slug && p.language === language);
+        const pageAny = pages.find(p => p.slug === slug);
+        const page = pageForLanguage || pageAny;
 
         if (!page) {
           throw new Error('Page not found');
@@ -62,7 +66,7 @@ const Page = () => {
     };
 
     loadPage();
-  }, [location.pathname]);
+  }, [location.pathname, language]);
 
   if (loading) {
     return (
