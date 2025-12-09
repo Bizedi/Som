@@ -15,7 +15,17 @@ const Footer = () => {
     );
   };
   
-  const footerSections = [
+  type FooterLink = {
+    title: string;
+    href: string;
+  };
+
+  type FooterSection = {
+    title: string;
+    links: FooterLink[];
+  };
+
+  const footerSections: FooterSection[] = [
     {
       title: t('footer.content'),
       links: [
@@ -48,12 +58,22 @@ const Footer = () => {
     }
   ];
 
-  const socialLinks = [
-    { icon: Youtube, key: 'youtube', href: "https://www.youtube.com/@miftahsom", label: t('social.youtube') },
-    { icon: null as any, key: 'tiktok', href: "https://www.tiktok.com/@miftahsom", label: 'TikTok' },
-    { icon: Twitter, key: 'x', href: "https://x.com/Miftahsom", label: 'X' },
-    { icon: Facebook, key: 'facebook', href: "https://www.facebook.com/miftahsom1/", label: t('social.facebook') },
-    { icon: Instagram, key: 'instagram', href: "https://www.instagram.com/miftahsom", label: t('social.instagram') },
+  type SocialIconProps = { className?: string } & React.SVGProps<SVGSVGElement>;
+  type SocialIconComponent = React.ComponentType<SocialIconProps>;
+
+  type SocialLink = {
+    icon: SocialIconComponent | null;
+    key: string;
+    href: string;
+    label: string;
+  };
+
+  const socialLinks: SocialLink[] = [
+    { icon: Youtube as SocialIconComponent, key: 'youtube', href: "https://www.youtube.com/@miftahsom", label: t('social.youtube') },
+    { icon: null, key: 'tiktok', href: "https://www.tiktok.com/@miftahsom", label: 'TikTok' },
+    { icon: Twitter as SocialIconComponent, key: 'x', href: "https://x.com/Miftahsom", label: 'X' },
+    { icon: Facebook as SocialIconComponent, key: 'facebook', href: "https://www.facebook.com/miftahsom1/", label: t('social.facebook') },
+    { icon: Instagram as SocialIconComponent, key: 'instagram', href: "https://www.instagram.com/miftahsom", label: t('social.instagram') },
   ];
 
   return (

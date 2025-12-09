@@ -50,12 +50,14 @@ const loadPostsFromJson = async (language: string = 'en'): Promise<BlogPost[]> =
       throw new Error(`Failed to fetch posts.json: ${response.status} ${response.statusText}`);
     }
     
-    const postsData = await response.json();
+    const postsData = (await response.json()) as Array<
+      Omit<BlogPost, "body"> & { html?: string }
+    >;
     console.log("Successfully loaded", postsData.length, "posts from posts.json");
     console.log("First post:", postsData[0]);
     
     // Convert the JSON data to BlogPost format
-    const posts: BlogPost[] = postsData.map((post: any) => ({
+    const posts: BlogPost[] = postsData.map((post) => ({
       title: post.title,
       date: post.date,
       image: post.image,
@@ -65,7 +67,7 @@ const loadPostsFromJson = async (language: string = 'en'): Promise<BlogPost[]> =
       readTime: post.readTime,
       language: post.language,
       slug: post.slug,
-      body: post.html // The JSON contains 'html' instead of 'body'
+      body: (post as { html?: string }).html ?? "",
     }));
     
     console.log("Converted posts:", posts.length);
@@ -77,11 +79,6 @@ const loadPostsFromJson = async (language: string = 'en'): Promise<BlogPost[]> =
     return filteredPosts;
   } catch (error) {
     console.error("Error loading posts from posts.json:", error);
-    console.error("Error details:", {
-      message: error.message,
-      stack: error.stack,
-      name: error.name
-    });
     // Return empty array as final fallback
     return [];
   }
