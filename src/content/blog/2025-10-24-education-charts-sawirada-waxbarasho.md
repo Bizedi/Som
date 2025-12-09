@@ -1,17 +1,16 @@
 ---
-title: Education Charts (Sawirada Waxbarasho)
+title: Education Charts
 date: 2025-10-24T07:54:31.185Z
 image: /images/snapshot_194.png
 category: Education
 excerpt: >
-  Waxaan idiin haynaa sawiradaas iyo kuwo kaloo badan. waxaa kaloo inoo soo
-  socda buugaagtii sheekooyinka ee caruurta, kuwaasoo baahi weyn ay uqabaan
-  waalidiinta Soomaaliyeed.
+  We have those pictures and more for you. We also have storybooks for children coming soon, which Somali parents greatly need.
 author: "P. A. Mr: Sadik Mohamed"
 readTime: 5 min read
-language: so
+language: en
 ---
-Waxaan idiin haynaa sawiradaas iyo kuwo kaloo badan. waxaa kaloo inoo soo socda buugaagtii sheekooyinka ee caruurta, kuwaasoo baahi weyn ay uqabaan waalidiinta Soomaaliyeed.
-Nagala Soo Xiriir:-
-WhatsApp: +254769872524,\
-Wicid iyo WhatsApp: +252616639802
+We have those pictures and more for you. We also have storybooks for children coming soon, which Somali parents greatly need.
+
+Contact us:
+WhatsApp: +254769872524,
+WhatsApp: +252616639802
