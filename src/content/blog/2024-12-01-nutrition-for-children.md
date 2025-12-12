@@ -1,15 +1,13 @@
 ---
 title: "Nutrition for Growing Children: Building Healthy Eating Habits"
-date: 2024-12-01T09:30:00.000Z
-image: /images/0969a0a39d1357a6f26f0308e4fee020.jpg
-category: Health
-excerpt: Essential nutrition guidelines for children of all ages, including meal
-  planning tips, healthy snack ideas, and dealing with picky eaters.
-author: Mr. Sadik Mohamed
-readTime: 8 min read
-language: en
+date: "2024-12-01T09:30:00.000Z"
+image: "/images/0969a0a39d1357a6f26f0308e4fee020.jpg"
+category: "Health"
+excerpt: "Essential nutrition guidelines for children of all ages, including meal planning tips, healthy snack ideas, and dealing with picky eaters."
+author: "Mr. Sadik Mohamed"
+readTime: "8 min read"
+language: "en"
 ---
-
 # Nutrition for Growing Children: Building Healthy Eating Habits
 
 Proper nutrition during childhood lays the foundation for lifelong health and well-being. As parents, understanding the nutritional needs of growing children and implementing healthy eating habits early can significantly impact their physical development, cognitive function, and overall health.

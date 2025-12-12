@@ -38,13 +38,13 @@
   {
     "slug": "cookies",
     "title": "Cookie Policy",
-    "html": "<p>We use cookies to improve your experience. This page is editable via Netlify CMS.</p>\n",
+    "html": "<p>We use cookies to improve your experience, remember preferences, and measure how visitors use our site. By continuing to browse, you agree to our cookie use.</p>\n<h3>What are cookies?</h3>\n<p>Small text files stored on your device to help websites function. We use:</p>\n<ul>\n<li><strong>Essential cookies</strong> to keep the site running (cannot be turned off).</li>\n<li><strong>Performance cookies</strong> to understand usage and improve content.</li>\n<li><strong>Preference cookies</strong> to remember language selection and settings.</li>\n</ul>\n<h3>How you can control cookies</h3>\n<ul>\n<li>You can clear or block cookies in your browser settings.</li>\n<li>Turning off non-essential cookies may affect some features.</li>\n<li>To change language without losing your choice, keep preference cookies enabled.</li>\n</ul>\n<h3>Contact</h3>\n<p>Questions? Email us at <a href=\"mailto:support@miftahsom.com\">support@miftahsom.com</a>.</p>\n",
     "language": "en"
   },
   {
     "slug": "cookies",
-    "title": "Siyaasadda Cookie",
-    "html": "<p>Waxaan u isticmaalnaa cookies si aan u wanaajinno khibradaada. </p>\n",
+    "title": "Kukiyada",
+    "html": "<p>Waxaan isticmaalnaa kukiyo si aan u hagaajino khibraddaada, u xasuusano doorbidyada, una ogaanno sida martidu u adeegsato bogga. Markaad sii dhex socoto, waxaad oggolaanaysaa isticmaalka kukiyada.</p>\n<h3>Kukiyo maxay yihiin?</h3>\n<p>Waa faylal yar oo qoraal ah oo lagu kaydiyo qalabkaaga si boggagu u shaqeeyaan. Waxaan adeegsanaa:</p>\n<ul>\n<li><strong>Kukiyada muhiimka ah</strong> si goobtu si sax ah u shaqeyso (lagama damin karo).</li>\n<li><strong>Kukiyada waxqabadka</strong> si aan u fahanno isticmaalka oo aan u hagaajino nuxurka.</li>\n<li><strong>Kukiyada doorbidka</strong> si loo xasuusto luqadda aad dooratay iyo dejimahaaga.</li>\n</ul>\n<h3>Sida aad u maamuli karto kukiyada</h3>\n<ul>\n<li>Waxaad ka tirtiri kartaa ama ka xannibi kartaa kukiyada dejimaha biraawsarkaaga.</li>\n<li>Haddii aad damiso kukiyada aan muhiimka ahayn, qaarkood astaamo laga yaabaa inay saameeyaan.</li>\n<li>Si luqadda aad dooratay aanay u lumin, waxa fiican in kukiyada doorbidka la daayo.</li>\n</ul>\n<h3>Nala soo xiriir</h3>\n<p>Su&#39;aalo? Ku soo qor <a href=\"mailto:support@miftahsom.com\">support@miftahsom.com</a>.</p>\n",
     "language": "so"
   },
   {

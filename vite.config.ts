@@ -114,8 +114,8 @@ interface OriginalPost {
 // Clean Microsoft Word HTML artifacts from content
 function cleanWordArtifacts(text: string): string {
   return text
-    .replace(/<!--\\[if[^>]*>[\s\S]*?<!\\[endif]-->/g, '') // Remove Word conditional comments
-    .replace(/<w:[^>]*>/g, '') // Remove Word XML tags
+    .replace(/<!--[\s\S]*?-->/g, '') // Strip all HTML comments (incl. StartFragment)
+    .replace(/<\/?w:[^>]*>/g, '') // Remove Word XML tags
     .replace(/<m:[^>]*>/g, '') // Remove Word math tags
     .replace(/<o:[^>]*>/g, '') // Remove Word object tags
     .replace(/<v:[^>]*>/g, '') // Remove Word VML tags
@@ -124,91 +124,139 @@ function cleanWordArtifacts(text: string): string {
     .replace(/\\[if[^>]*>[\s\S]*?\\[endif]/g, '') // Remove escaped conditionals
     .replace(/\\[endif]/g, '') // Remove escaped endif
     .replace(/\\[if[^>]*>/g, '') // Remove escaped if
-    .trim();
+    .replace(/^\s+|\s+$/g, '') // Trim whitespace
+    .replace(/\n{3,}/g, '\n\n'); // Collapse excessive blank lines
 }
 
-// MyMemory API helper (free, no API key required)
+// Ensure translated text is usable; otherwise fall back to the source
+function ensureMeaningfulTranslation(translated: string, original: string): string {
+  const cleanedTranslated = (translated ?? '').trim();
+  const cleanedOriginal = (original ?? '').trim();
+  if (!cleanedOriginal) return cleanedTranslated || original;
+  if (!cleanedTranslated) return cleanedOriginal;
+
+  const translatedLen = cleanedTranslated.length;
+  const originalLen = cleanedOriginal.length;
+  const minThreshold = Math.min(200, Math.floor(originalLen * 0.4));
+
+  if (translatedLen < minThreshold) {
+    return cleanedOriginal;
+  }
+
+  return cleanedTranslated;
+}
+
+// Translation helper with chunking and provider fallbacks
 async function translateText(text: string, source: 'en' | 'so', target: 'en' | 'so'): Promise<string> {
   if (!text || source === target) return text;
   const cleanText = cleanWordArtifacts(text);
   if (!cleanText.trim()) return text;
 
-  const key = `${source}:${target}:${cleanText}`;
-  const cached = translationCache.get(key);
-  if (cached) return cached;
+  const maxChunkLength = 3500; // stay well below free API limits
 
-  const sourceLang = source === 'so' ? 'so' : 'en';
-  const targetLang = target === 'so' ? 'so' : 'en';
+  const translateChunk = async (chunkText: string): Promise<string> => {
+    const key = `${source}:${target}:${chunkText}`;
+    const cached = translationCache.get(key);
+    if (cached) return cached;
 
-  // 1) Google translate public endpoint (most reliable fallback)
-  try {
-    const googleUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&q=${encodeURIComponent(cleanText)}`;
-    const googleRes = await fetch(googleUrl);
-    if (googleRes.ok) {
-      const googleJson = (await googleRes.json()) as unknown;
-      const translated =
-        Array.isArray(googleJson) &&
-        Array.isArray(googleJson[0]) &&
-        Array.isArray(googleJson[0][0]) &&
-        typeof googleJson[0][0][0] === 'string'
-          ? googleJson[0][0][0]
-          : undefined;
-      if (translated) {
-        translationCache.set(key, translated);
-        return translated;
-      }
-    }
-  } catch {
-    // ignore and fall through
-  }
+    const sourceLang = source === 'so' ? 'so' : 'en';
+    const targetLang = target === 'so' ? 'so' : 'en';
 
-  // 2) MyMemory (free)
-  try {
-    const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(cleanText)}&langpair=${sourceLang}|${targetLang}`;
-    const res = await fetch(url);
-    if (res.ok) {
-      const json = (await res.json()) as unknown;
-      const typed = json as MyMemoryResponse;
-      if (typed.responseStatus === 200 && typed.responseData?.translatedText) {
-        const translated = typed.responseData.translatedText;
-        translationCache.set(key, translated);
-        return translated;
-      }
-    }
-  } catch {
-    // ignore and try azure fallback
-  }
+    const accept = (candidate?: string) => {
+      if (!candidate) return undefined;
+      const trimmed = candidate.trim();
+      if (!trimmed) return undefined;
+      // Reject exact echo of source to avoid untranslated fallbacks
+      if (trimmed.replace(/\s+/g, ' ') === chunkText.replace(/\s+/g, ' ')) return undefined;
+      translationCache.set(key, trimmed);
+      return trimmed;
+    };
 
-  // 3) Optional Azure (only if explicitly preferred and credentials provided)
-  if (preferAzure && azureTranslatorKey) {
+    // 1) Google translate public endpoint (most reliable fallback)
     try {
-      const azureUrl = `${azureTranslatorEndpoint}/translate?api-version=3.0&from=${sourceLang}&to=${targetLang}`;
-      const azureRes = await fetch(azureUrl, {
-        method: 'POST',
-        headers: {
-          'Ocp-Apim-Subscription-Key': azureTranslatorKey,
-          ...(azureTranslatorRegion ? { 'Ocp-Apim-Subscription-Region': azureTranslatorRegion } : {}),
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify([{ Text: cleanText }])
-      });
-
-      if (azureRes.ok) {
-        const azureJson = (await azureRes.json()) as unknown;
-        const typed = azureJson as AzureResponse;
-        const translated = typed[0]?.translations?.[0]?.text;
-        if (translated) {
-          translationCache.set(key, translated);
-          return translated;
-        }
+      const googleUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sourceLang}&tl=${targetLang}&dt=t&q=${encodeURIComponent(chunkText)}`;
+      const googleRes = await fetch(googleUrl);
+      if (googleRes.ok) {
+        const googleJson = (await googleRes.json()) as unknown;
+        const translated =
+          Array.isArray(googleJson) &&
+          Array.isArray(googleJson[0]) &&
+          Array.isArray(googleJson[0][0]) &&
+          typeof googleJson[0][0][0] === 'string'
+            ? googleJson[0][0][0]
+            : undefined;
+        const accepted = accept(translated);
+        if (accepted) return accepted;
       }
     } catch {
-      // swallow and return clean text
+      // ignore and fall through
     }
+
+    // 2) MyMemory (free)
+    try {
+      const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(chunkText)}&langpair=${sourceLang}|${targetLang}`;
+      const res = await fetch(url);
+      if (res.ok) {
+        const json = (await res.json()) as unknown;
+        const typed = json as MyMemoryResponse;
+        const accepted = accept(typed.responseStatus === 200 ? typed.responseData?.translatedText : undefined);
+        if (accepted) return accepted;
+      }
+    } catch {
+      // ignore and try azure fallback
+    }
+
+    // 3) Optional Azure (only if explicitly preferred and credentials provided)
+    if (preferAzure && azureTranslatorKey) {
+      try {
+        const azureUrl = `${azureTranslatorEndpoint}/translate?api-version=3.0&from=${sourceLang}&to=${targetLang}`;
+        const azureRes = await fetch(azureUrl, {
+          method: 'POST',
+          headers: {
+            'Ocp-Apim-Subscription-Key': azureTranslatorKey,
+            ...(azureTranslatorRegion ? { 'Ocp-Apim-Subscription-Region': azureTranslatorRegion } : {}),
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify([{ Text: chunkText }])
+        });
+
+        if (azureRes.ok) {
+          const azureJson = (await azureRes.json()) as unknown;
+          const typed = azureJson as AzureResponse;
+          const accepted = accept(typed[0]?.translations?.[0]?.text);
+          if (accepted) return accepted;
+        }
+      } catch {
+        // swallow and return clean text
+      }
+    }
+
+    // Last resort return cleaned text (at least not empty)
+    return chunkText;
+  };
+
+  if (cleanText.length > maxChunkLength) {
+    const paragraphs = cleanText.split(/\n{2,}/);
+    const chunks: string[] = [];
+    let current = '';
+    for (const p of paragraphs) {
+      const candidate = current ? `${current}\n\n${p}` : p;
+      if (candidate.length > maxChunkLength && current) {
+        chunks.push(current);
+        current = p;
+      } else {
+        current = candidate;
+      }
+    }
+    if (current) chunks.push(current);
+    const translatedParts: string[] = [];
+    for (const part of chunks) {
+      translatedParts.push(await translateChunk(part));
+    }
+    return translatedParts.join('\n\n');
   }
 
-  // Last resort return cleaned text to avoid empty strings
-  return cleanText;
+  return translateChunk(cleanText);
 }
 
 // Plugin to generate a JSON feed of pages at build time and dev server start
@@ -254,14 +302,26 @@ const generatePagesJson = () => {
         if (!autoTranslateEnabled) continue;
 
         if (!langs.en && langs.so) {
-          const translatedTitle = await translateText(langs.so.title, 'so', 'en');
-          const translatedBody = await translateText(langs.so.rawContent, 'so', 'en');
+          const translatedTitle = ensureMeaningfulTranslation(
+            await translateText(langs.so.title, 'so', 'en'),
+            langs.so.title
+          );
+          const translatedBody = ensureMeaningfulTranslation(
+            await translateText(langs.so.rawContent, 'so', 'en'),
+            langs.so.rawContent
+          );
           enriched.push({ slug, title: translatedTitle, rawContent: translatedBody, language: 'en' });
         }
 
         if (!langs.so && langs.en) {
-          const translatedTitle = await translateText(langs.en.title, 'en', 'so');
-          const translatedBody = await translateText(langs.en.rawContent, 'en', 'so');
+          const translatedTitle = ensureMeaningfulTranslation(
+            await translateText(langs.en.title, 'en', 'so'),
+            langs.en.title
+          );
+          const translatedBody = ensureMeaningfulTranslation(
+            await translateText(langs.en.rawContent, 'en', 'so'),
+            langs.en.rawContent
+          );
           enriched.push({ slug, title: translatedTitle, rawContent: translatedBody, language: 'so' });
         }
       }
@@ -314,7 +374,7 @@ const generatePostsJson = () => {
   };
 
   const toSlug = (filePath: string): string => {
-    const base = path.basename(filePath).replace(/\.md$/, '');
+    const base = path.basename(filePath).replace(/\.md$/, '').replace(/-so$|-en$/i, '');
     return base.replace(/^[0-9]{4}-[0-9]{2}-[0-9]{2}-/, '');
   };
 
@@ -374,9 +434,18 @@ const generatePostsJson = () => {
         if (!autoTranslateEnabled) continue;
         if (!languages.en && languages.so) {
           const src = languages.so;
-          const title = await translateText(src.title || slug, 'so', 'en');
-          const excerpt = src.excerpt ? await translateText(src.excerpt, 'so', 'en') : '';
-          const bodyMd = await translateText(src.rawContent, 'so', 'en');
+          const title = ensureMeaningfulTranslation(
+            await translateText(src.title || slug, 'so', 'en'),
+            src.title || slug
+          );
+          const excerpt = ensureMeaningfulTranslation(
+            src.excerpt ? await translateText(src.excerpt, 'so', 'en') : '',
+            src.excerpt || ''
+          );
+          const bodyMd = ensureMeaningfulTranslation(
+            await translateText(src.rawContent, 'so', 'en'),
+            src.rawContent
+          );
           const category = src.category ? (categoryTranslateMap[src.category]?.en || src.category) : undefined;
           enriched.push({
             title,
@@ -393,9 +462,18 @@ const generatePostsJson = () => {
         }
         if (!languages.so && languages.en) {
           const src = languages.en;
-          const title = await translateText(src.title || slug, 'en', 'so');
-          const excerpt = src.excerpt ? await translateText(src.excerpt, 'en', 'so') : '';
-          const bodyMd = await translateText(src.rawContent, 'en', 'so');
+          const title = ensureMeaningfulTranslation(
+            await translateText(src.title || slug, 'en', 'so'),
+            src.title || slug
+          );
+          const excerpt = ensureMeaningfulTranslation(
+            src.excerpt ? await translateText(src.excerpt, 'en', 'so') : '',
+            src.excerpt || ''
+          );
+          const bodyMd = ensureMeaningfulTranslation(
+            await translateText(src.rawContent, 'en', 'so'),
+            src.rawContent
+          );
           const category = src.category ? (categoryTranslateMap[src.category]?.so || src.category) : undefined;
           enriched.push({
             title,

@@ -1,15 +1,13 @@
 ---
 title: "Balancing Screen Time: Raising Digital-Native Children"
-date: 2024-10-25T15:30:00.000Z
-image: /images/35.jpg
-category: Parenting
-excerpt: Navigate the digital age with your children by finding healthy balance
-  between screen time and real-world experiences.
-author: P. A. Mr. Sadik Sheikh Mohamed
-readTime: 8 min read
-language: so
+date: "2024-10-25T15:30:00.000Z"
+image: "/images/35.jpg"
+category: "Parenting"
+excerpt: "Navigate the digital age with your children by finding healthy balance between screen time and real-world experiences."
+author: "P. A. Mr. Sadik Sheikh Mohamed"
+readTime: "8 min read"
+language: "so"
 ---
-
 # Balancing Screen Time: Raising Digital-Native Children
 
 In today's digital world, screens are an integral part of our children's lives. From educational apps to social media, technology offers incredible opportunities for learning and connection. However, finding the right balance between beneficial screen use and healthy offline activities is one of the most important challenges modern parents face.

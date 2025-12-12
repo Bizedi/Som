@@ -1,21 +1,12 @@
 ---
-title: Best ways to improve kids’ Mentality
-date: 2025-10-13T15:47:07.172Z
-image: /images/4.jpg
-category: Parenting
-excerpt: >-
-  Based on child development research and practical community experience:
-
-  ________________________________________
-
-  🧠 1. Encourage Curiosity and Critical Thinking
-
-  •	Let children ask “why” and “how” questions freely.
-
-  •	Use real-life examples and let them explore ideas through play, drawing, or small 
-author: P. A. Sadik Mohamed
-readTime: 5 min read
-language: en
+title: "Best ways to improve kids’ Mentality"
+date: "2025-10-13T15:47:07.172Z"
+image: "/images/4.jpg"
+category: "Parenting"
+excerpt: "Based on child development research and practical community experience:n________________________________________n🧠 1. Encourage Curiosity and Critical Thinkingn•tLet children ask “why” and “how” questions freely.n•tUse real-life examples and let them explore ideas through play, drawing, or small "
+author: "P. A. Sadik Mohamed"
+readTime: "5 min read"
+language: "en"
 ---
 <!--\[if !mso]>
 <style>

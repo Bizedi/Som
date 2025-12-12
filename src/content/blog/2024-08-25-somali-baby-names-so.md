@@ -1,15 +1,13 @@
 ---
 title: "Magacyada Soomaaliga: Dhaqanka iyo Macnaha Quruxda"
-date: 2024-08-25T10:00:00.000Z
-image: /images/deed5bb3acbc0acd31fcc4f19d2c9ed9-1.jpg
-category: Magacyada Carruurta
-excerpt: Baadi magacyada dhaqanka ah ee carruurta, muhiimadda dhaqameedka, iyo
-  macnaha quruxda ee doorashooyinka caanka ah ee qoysaska casriga ah.
-author: Dr. Aisha Mohamed
-readTime: 6 daqiiqo oo akhris
-language: so
+date: "2024-08-25T10:00:00.000Z"
+image: "/images/deed5bb3acbc0acd31fcc4f19d2c9ed9-1.jpg"
+category: "Magacyada Carruurta"
+excerpt: "Baadi magacyada dhaqanka ah ee carruurta, muhiimadda dhaqameedka, iyo macnaha quruxda ee doorashooyinka caanka ah ee qoysaska casriga ah."
+author: "Dr. Aisha Mohamed"
+readTime: "6 daqiiqo oo akhris"
+language: "so"
 ---
-
 # Magacyada Soomaaliga: Dhaqanka iyo Macnaha Quruxda
 
 Magacyada Soomaaliga waxay ka mid yihiin magacyada ugu quruxda badan dunida, oo leh taariikh dheer, macno qurux badan, iyo muhiimad dhaqameed oo qoysaska Soomaalida ah ay ku faani karaan carruurtooda.

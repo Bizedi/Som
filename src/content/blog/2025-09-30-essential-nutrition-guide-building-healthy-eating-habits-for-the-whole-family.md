@@ -1,17 +1,13 @@
 ---
-title: "Essential Nutrition Guide: Building Healthy Eating Habits for the Whole
-  Family"
-date: 2025-09-30T17:40:50.140Z
-image: /images/a-a-a.jpg
-category: Health
-excerpt: Discover comprehensive strategies for maintaining optimal health
-  through balanced nutrition, including practical meal planning tips and
-  evidence-based dietary recommendations that work for busy families.
-author: Dr. Amina Hassan
-readTime: 8 min read
-language: en
+title: "Essential Nutrition Guide: Building Healthy Eating Habits for the Whole Family"
+date: "2025-09-30T17:40:50.140Z"
+image: "/images/a-a-a.jpg"
+category: "Health"
+excerpt: "Discover comprehensive strategies for maintaining optimal health through balanced nutrition, including practical meal planning tips and evidence-based dietary recommendations that work for busy families."
+author: "Dr. Amina Hassan"
+readTime: "8 min read"
+language: "en"
 ---
-
 # Essential Nutrition Guide: Building Healthy Eating Habits for the Whole Family
 
 Maintaining a healthy diet for your family can seem overwhelming in today's fast-paced world. However, with the right strategies and understanding of nutritional fundamentals, you can create sustainable eating habits that benefit everyone in your household.

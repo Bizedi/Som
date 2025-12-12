@@ -5,9 +5,6 @@ import Sidebar from '@/components/Sidebar';
 import ArticleCard from '@/components/ArticleCard';
 import { Calendar, User, Share2, Facebook, Twitter, Linkedin } from 'lucide-react';
 import { useTranslation } from '@/contexts/TranslationContext';
-import heroHealthImage from '@/assets/hero-health-nutrition.jpg';
-import heroParentingImage from '@/assets/hero-parenting.jpg';
-import heroQuranImage from '@/assets/hero-quran.jpg';
 import { loadBlogPosts, type BlogPost } from '@/lib/contentLoader';
 
 const ArticlePage = () => {
@@ -40,25 +37,25 @@ const ArticlePage = () => {
 
   const relatedArticles = [
     {
-      title: "Healthy Breakfast Ideas for Growing Children",
-      excerpt: "Start your child's day right with these nutritious and delicious breakfast options.",
-      image: heroHealthImage,
+      title: t('related.breakfast-title'),
+      excerpt: t('related.breakfast-excerpt'),
+      image: "/images/hero-health-nutrition.jpg",
       category: t('category.health.title'),
       date: "2025-01-10",
       href: "/articles/healthy-breakfast-children"
     },
     {
-      title: "Teaching Children About Healthy Food Choices", 
-      excerpt: "Practical strategies for educating kids about nutrition in an age-appropriate way.",
-      image: heroParentingImage,
+      title: t('related.teaching-title'),
+      excerpt: t('related.teaching-excerpt'),
+      image: "/images/hero-parenting.jpg",
       category: t('category.parenting.title'),
       date: "2025-01-08",
       href: "/articles/teaching-healthy-food-choices"
     },
     {
-      title: "Islamic Principles of Eating and Nutrition",
-      excerpt: "Explore how Islamic teachings guide us toward mindful and healthy eating habits.",
-      image: heroQuranImage,
+      title: t('related.islamic-title'),
+      excerpt: t('related.islamic-excerpt'),
+      image: "/images/hero-quran.jpg",
       category: t('category.quran.title'),
       date: "2025-01-05",
       href: "/articles/islamic-principles-nutrition"

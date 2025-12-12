@@ -1,15 +1,13 @@
 ---
 title: "Nafaqada Carruurta: Dhiska Caafimaadka iyo Horumarka"
-date: 2024-12-01T14:30:00.000Z
-image: /images/istockphoto-1438924216-612x612.jpg
-category: Caafimaad
-excerpt: Ka baro sida loo dhiso caafimaadka carruurta iyadoo la adeegsanayo nafaqada
-  wanaagsan, cuntada macno leh, iyo caadooyin cunto oo joogto ah.
-author: Dr. Amina Hassan
-readTime: 10 daqiiqo oo akhris
-language: so
+date: "2024-12-01T14:30:00.000Z"
+image: "/images/istockphoto-1438924216-612x612.jpg"
+category: "Caafimaad"
+excerpt: "Ka baro sida loo dhiso caafimaadka carruurta iyadoo la adeegsanayo nafaqada wanaagsan, cuntada macno leh, iyo caadooyin cunto oo joogto ah."
+author: "Dr. Amina Hassan"
+readTime: "10 daqiiqo oo akhris"
+language: "so"
 ---
-
 # Nafaqada Carruurta: Dhiska Caafimaadka iyo Horumarka
 
 Nafaqada wanaagsan waa aasaaska caafimaadka wanaagsan ee carruurta. Iyadoo la adeegsanayo cuntooyin macno leh, waqtiga saxan ah, iyo fahamka nafaqada aasaasiga ah, waxaan dhisay karnaa carruurta caafimaad qaba oo faraxsan oo horumarsan si fiican.

@@ -1,15 +1,13 @@
 ---
 title: "Mental Health Awareness: Breaking the Stigma in Our Communities"
-date: 2024-11-20T14:00:00.000Z
-image: /images/photo-1588994538331-5cc9ba0284c3.jpg
-category: Health
-excerpt: Understanding mental health, recognizing signs of distress, and
-  creating supportive environments for ourselves and our loved ones.
-author: Mr. Mifta
-readTime: 7 min read
-language: en
+date: "2024-11-20T14:00:00.000Z"
+image: "/images/photo-1588994538331-5cc9ba0284c3.jpg"
+category: "Health"
+excerpt: "Understanding mental health, recognizing signs of distress, and creating supportive environments for ourselves and our loved ones."
+author: "Mr. Mifta"
+readTime: "7 min read"
+language: "en"
 ---
-
 # Mental Health Awareness: Breaking the Stigma in Our Communities
 
 Mental health is an integral part of our overall well-being, yet it remains one of the most misunderstood and stigmatized aspects of health in many communities. As we work to build healthier families and stronger communities, addressing mental health with compassion, understanding, and evidence-based approaches becomes essential.

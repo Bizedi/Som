@@ -1,16 +1,13 @@
 ---
 title: "Hagaha Caafimaadka: Dhiska Caadada Cuntada Caafimaadka ee Qoyska"
-date: 2025-01-15T10:00:00.000Z
-image: /images/muslim-family-view-mosque-muslim-family-eid-greetings-back-view-jumma-mubarak-photo.jpeg
-category: Caafimaad
-excerpt: Hel istiraatiijiyooyin dhamaystiran oo loogu talagalay ilaalinta
-  caafimaadka si fiican, oo ay ku jiraan talooyin ku saabsan qorshaynta cuntada
-  iyo talooyin ku salaysan xogta.
-author: Dr. Amina Hassan
-readTime: 8 daqiiqo oo akhris
-language: so
+date: "2025-01-15T10:00:00.000Z"
+image: "/images/muslim-family-view-mosque-muslim-family-eid-greetings-back-view-jumma-mubarak-photo.jpeg"
+category: "Caafimaad"
+excerpt: "Hel istiraatiijiyooyin dhamaystiran oo loogu talagalay ilaalinta caafimaadka si fiican, oo ay ku jiraan talooyin ku saabsan qorshaynta cuntada iyo talooyin ku salaysan xogta."
+author: "Dr. Amina Hassan"
+readTime: "8 daqiiqo oo akhris"
+language: "so"
 ---
-
 # Hagaha Caafimaadka: Dhiska Caadada Cuntada Caafimaadka ee Qoyska
 
 Ilaalinta cunto caafimaad qaba qoyskaaga ayaa noqon karta mid aad u adag dunida casriga ah ee degdeg ah. Si kastaba ha ahaatee, iyadoo la adeegsanayo istiraatiijiyooyin saxan ah iyo fahamka aasaasiga ah ee nafaqada, waxaad dhisay kartaa caadooyin cunto oo joogto ah oo danta u ah dhammaan qoyskaaga.

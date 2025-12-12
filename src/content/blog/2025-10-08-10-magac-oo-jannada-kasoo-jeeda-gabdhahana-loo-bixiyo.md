@@ -1,14 +1,13 @@
 ---
-title: 10 Paradise-Inspired Girl Names
-date: 2025-10-08T09:12:49.306Z
-image: /images/10-ka-magac-logo.jpg
-category: Baby Names
+title: "10 Paradise-Inspired Girl Names"
+date: "2025-10-08T09:12:49.306Z"
+image: "/images/10-ka-magac-logo.jpg"
+category: "Baby Names"
 excerpt: "A curated list of meaningful girl names rooted in Islamic tradition, with brief meanings."
-author: P. A. Sadik Mohamed
-readTime: 5 min read
-language: en
+author: "P. A. Sadik Mohamed"
+readTime: "5 min read"
+language: "en"
 ---
-
 Here are ten beautiful girl names inspired by paradise, each with a brief meaning:
 
 - **Sidra** – Lote tree of the highest heaven.

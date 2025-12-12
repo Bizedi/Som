@@ -1,16 +1,13 @@
 ---
 title: "Waxbarashada STEM ee Carruurta: Dhiska Horumarayaasha Mustaqbalka"
-date: 2024-09-15T10:15:00.000Z
-image: /images/arabic-mother-boy-beautiful-little-56833845.webp
-category: Waxbarasho
-excerpt: Ka baro sida loo soo bandhigo Sayniska, Teknoolajiyada, Injineernimada, iyo
-  Xisaabta carruurta si xiiso leh, da'da haysata, oo kiciya xiisaha iyo
-  abuurka.
-author: Mr. Mifta
-readTime: 11 daqiiqo oo akhris
-language: so
+date: "2024-09-15T10:15:00.000Z"
+image: "/images/arabic-mother-boy-beautiful-little-56833845.webp"
+category: "Waxbarasho"
+excerpt: "Ka baro sida loo soo bandhigo Sayniska, Teknoolajiyada, Injineernimada, iyo Xisaabta carruurta si xiiso leh, da'da haysata, oo kiciya xiisaha iyo abuurka."
+author: "Mr. Mifta"
+readTime: "11 daqiiqo oo akhris"
+language: "so"
 ---
-
 # Waxbarashada STEM ee Carruurta: Dhiska Horumarayaasha Mustaqbalka
 
 Dunida casriga ah ee u koraaya, waxbarashada STEM (Sayniska, Teknoolajiyada, Injineernimada, iyo Xisaabta) waxay noqotay mid aad u muhiim ah. Maadooyinkan waxay horseedaan horumar, xalinta dhibaatooyinka adag, oo abuurta fursado shaqooyin macno leh. Iyadoo la soo bandhigayo carruurta fikradaha STEM hore iyo si xiiso leh, waxaan caawin karnaa inay horumariyaan awoodaha fikirka muhiimka ah, abuurka, iyo jacaylka barashada oo ay u adeegsan doonaan noloshooda oo dhan.

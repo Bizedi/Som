@@ -1,13 +1,12 @@
 ---
-title: Important Announcement
-date: 2025-11-03T08:07:53.203Z
-image: /images/miftah-online-logos-jpg.jpg
-category: Baby Names
-excerpt: |
-  Miftah Som now offers online Quran, literacy, and English programs with limited seats available.
-author: P. A. Mr. Sadik Mohamed
-readTime: 5 min read
-language: en
+title: "Important Announcement"
+date: "2025-11-03T08:07:53.203Z"
+image: "/images/miftah-online-logos-jpg.jpg"
+category: "Baby Names"
+excerpt: "Miftah Som now offers online Quran, literacy, and English programs with limited seats available.n"
+author: "P. A. Mr. Sadik Mohamed"
+readTime: "5 min read"
+language: "en"
 ---
 <!--\[if gte mso 9]><xml>
  <o:OfficeDocumentSettings>

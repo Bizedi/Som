@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode, useMemo, useCallback } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useMemo, useCallback, useRef } from 'react';
 
 interface TranslationContextType {
   language: string;
@@ -46,6 +46,14 @@ const translations = {
     // Article Grid
     'articles.somali-baby-names': 'Somali Baby Names: Cultural Heritage and Beautiful Meanings',
     'articles.somali-baby-names-excerpt': 'Explore traditional Somali names for children, their cultural significance, and the beautiful meanings behind popular choices for modern families.',
+
+    // Related Articles
+    'related.breakfast-title': 'Healthy Breakfast Ideas for Growing Children',
+    'related.breakfast-excerpt': 'Start your child\'s day right with these nutritious and delicious breakfast options.',
+    'related.teaching-title': 'Teaching Children About Healthy Food Choices',
+    'related.teaching-excerpt': 'Practical strategies for educating kids about nutrition in an age-appropriate way.',
+    'related.islamic-title': 'Islamic Principles of Eating and Nutrition',
+    'related.islamic-excerpt': 'Explore how Islamic teachings guide us toward mindful and healthy eating habits.',
     'articles.work-life-balance': 'Top 10 Countries for Work-Life Balance in 2025',
     'articles.work-life-balance-excerpt': 'Comprehensive analysis of nations that prioritize employee well-being, family time, and sustainable career growth.',
     'articles.islamic-values': 'Teaching Children About Islamic Values at Home',
@@ -139,6 +147,14 @@ const translations = {
     'nav.baby-names': 'Magacyada Carruurta',
     'nav.education': 'Waxbarasho',
     'nav.quran': 'Quraanka',
+
+    // Related Articles
+    'related.breakfast-title': 'Fikradaha Quraacda Caafimaadka ee Carruurta Koraya',
+    'related.breakfast-excerpt': 'Maalinta carruurtaada ku bilow si sax ah oo leh doorashooyinkan nafaqada leh oo macaan.',
+    'related.teaching-title': 'Baritaanka Carruurta Ku Saabsan Doorashooyinka Cuntada Caafimaadka',
+    'related.teaching-excerpt': 'Istaraatiijiyooyin wax ku ool ah oo loogu talagalay baritaanka carruurta nafaqada si da\'da ku habboon.',
+    'related.islamic-title': 'Mabaadi\'da Islaamka ee Cunidda iyo Nafaqada',
+    'related.islamic-excerpt': 'Sahami sida baritaanka Islaamka ay inagu hagaan caadooyinka cuntada miyirka leh iyo caafimaadka.',
     
     // Common
     'common.search': 'Raadi maqaallo...',
@@ -259,8 +275,13 @@ const TranslationContext = createContext<TranslationContextType | undefined>(und
 
 export const TranslationProvider: React.FC<TranslationProviderProps> = ({ children }) => {
   const [language, setLanguage] = useState<string>('en');
+  const lastToggleRef = useRef<number>(0);
 
   const toggleLanguage = useCallback(() => {
+    const now = Date.now();
+    // Ignore rapid double-clicks to prevent accidental flip-flop
+    if (now - lastToggleRef.current < 400) return;
+    lastToggleRef.current = now;
     setLanguage(prev => prev === 'en' ? 'so' : 'en');
   }, []);
 

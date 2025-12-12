@@ -1,15 +1,13 @@
 ---
 title: "Arabic Baby Names: Timeless Beauty and Deep Meaning"
-date: 2024-07-20T11:45:00.000Z
-image: /images/360_f_957472690_jgdhdcazhzbpyja196vjusd7jv9j5h5h.jpg
-category: Baby Names
-excerpt: Explore the rich tradition of Arabic baby names, their poetic meanings,
-  and cultural significance for families seeking beautiful, meaningful names.
-author: Mr. Mifta
-readTime: 7 min read
-language: en
+date: "2024-07-20T11:45:00.000Z"
+image: "/images/360_f_957472690_jgdhdcazhzbpyja196vjusd7jv9j5h5h.jpg"
+category: "Baby Names"
+excerpt: "Explore the rich tradition of Arabic baby names, their poetic meanings, and cultural significance for families seeking beautiful, meaningful names."
+author: "Mr. Mifta"
+readTime: "7 min read"
+language: "en"
 ---
-
 # Arabic Baby Names: Timeless Beauty and Deep Meaning
 
 Arabic names are among the most beautiful and meaningful names in the world, carrying with them centuries of history, poetry, and cultural significance. These names often reflect the rich linguistic heritage of the Arabic language, with their melodious sounds and profound meanings making them popular choices for families around the world, regardless of their cultural background.

@@ -1,15 +1,13 @@
 ---
 title: "Quran Memorization: A Guide for Children and Families"
-date: 2024-07-05T09:00:00.000Z
-image: /images/quran-4651747.webp
-category: Quran
-excerpt: Discover effective strategies for helping children memorize the Quran,
-  creating a loving and supportive environment for this beautiful journey.
-author: Mr. Mifta
-readTime: 10 min read
-language: en
+date: "2024-07-05T09:00:00.000Z"
+image: "/images/quran-4651747.webp"
+category: "Quran"
+excerpt: "Discover effective strategies for helping children memorize the Quran, creating a loving and supportive environment for this beautiful journey."
+author: "Mr. Mifta"
+readTime: "10 min read"
+language: "en"
 ---
-
 # Quran Memorization: A Guide for Children and Families
 
 Memorizing the Quran is one of the most beautiful and rewarding journeys a Muslim can undertake. For children, this journey not only builds a strong foundation in Islamic knowledge but also develops discipline, focus, and a deep connection with Allah's words. As parents and educators, we have the privilege of guiding our children through this sacred process with love, patience, and understanding.

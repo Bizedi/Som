@@ -1,18 +1,12 @@
 ---
-title: Hababka Ugu Fiican Ee Lagu Horumarin Karo Maskaxda Caruurta
-date: 2025-10-13T16:05:11.643Z
-image: /images/magacyada-m-logo.jpg
-category: Parenting
-excerpt: >-
-  1. Ku Dhiiri-geli carruurta inay su’aalo ku waydiin karaan islamrkaana ay
-  ufikiri karaan si qoto dheer
-
-  •	U ogolow carruurta inay si xor ah kuu weydiin karaan su’aalaha “sabab?” iyo “sidee?”.
-
-  •	U adeegso caruurta tusaalooyin laxriira nolol maalmeedkooda, kuna dhiirrigeli inay 
-author: P. A. Sadik Mohamed
-readTime: 5 min read
-language: so
+title: "Hababka Ugu Fiican Ee Lagu Horumarin Karo Maskaxda Caruurta"
+date: "2025-10-13T16:05:11.643Z"
+image: "/images/magacyada-m-logo.jpg"
+category: "Parenting"
+excerpt: "1. Ku Dhiiri-geli carruurta inay su’aalo ku waydiin karaan islamrkaana ay ufikiri karaan si qoto dheern•tU ogolow carruurta inay si xor ah kuu weydiin karaan su’aalaha “sabab?” iyo “sidee?”.n•tU adeegso caruurta tusaalooyin laxriira nolol maalmeedkooda, kuna dhiirrigeli inay "
+author: "P. A. Sadik Mohamed"
+readTime: "5 min read"
+language: "so"
 ---
 <!--\[if !mso]>
 <style>

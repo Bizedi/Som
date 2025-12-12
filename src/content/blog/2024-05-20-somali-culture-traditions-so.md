@@ -1,15 +1,13 @@
 ---
 title: "Dhaqanka iyo Caadada Soomaaliga: Ilaalinta Dhaqanka ee Jiilka Mustaqbalka"
-date: 2024-05-20T16:45:00.000Z
-image: /images/1.webp
-category: Waxbarasho
-excerpt: Baadi dhaqanka Soomaaliga oo qurux badan, caadooyinka, iyo qiyamka,
-  oo ka baro sida loo baro carruurta si macno leh.
-author: Mr. Mifta
-readTime: 8 daqiiqo oo akhris
-language: so
+date: "2024-05-20T16:45:00.000Z"
+image: "/images/1.webp"
+category: "Waxbarasho"
+excerpt: "Baadi dhaqanka Soomaaliga oo qurux badan, caadooyinka, iyo qiyamka, oo ka baro sida loo baro carruurta si macno leh."
+author: "Mr. Mifta"
+readTime: "8 daqiiqo oo akhris"
+language: "so"
 ---
-
 # Dhaqanka iyo Caadada Soomaaliga: Ilaalinta Dhaqanka ee Jiilka Mustaqbalka
 
 Dhaqanka Soomaaliga waa dhaqan qurux badan oo ka kooban taariikh dheeraad ah, caadooyin, iyo qiyam oo la wadaagay jiilal. Qoysaska Soomaaliga ee dunida ku nool, ilaalinta iyo barista caadooyinkan dhaqanka ee carruurta waa muhiim u ah si loo ilaaliyo aqoonsiga dhaqanka, loo xoojiyo xidhiidhka qoyska, loona hubiyo in jiilka mustaqbalka ay heli karaan xigmadda iyo quruxda dhaqanka Soomaaliga.
