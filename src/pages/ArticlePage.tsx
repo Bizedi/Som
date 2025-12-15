@@ -98,18 +98,22 @@ const ArticlePage = () => {
       const isiOS = /iPhone|iPad|iPod/i.test(ua);
 
       if (isAndroid) {
+        const intentChooser = `intent://send?text=${text}#Intent;scheme=whatsapp;end`; // no package -> lets Android surface WA vs WA Business
         const intentPrimary = `intent://send?text=${text}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
         const intentBusiness = `intent://send?text=${text}#Intent;scheme=whatsapp;package=com.whatsapp.w4b;end`;
         const webFallback = `https://wa.me/?text=${text}`;
 
-        // Try primary WhatsApp, then Business, then web fallback
-        window.location.href = intentPrimary;
+        // Try chooser first (no package), then classic, then business, then web fallback
+        window.location.href = intentChooser;
         setTimeout(() => {
-          window.location.href = intentBusiness;
+          window.location.href = intentPrimary;
           setTimeout(() => {
-            window.open(webFallback, '_blank');
-          }, 450);
-        }, 450);
+            window.location.href = intentBusiness;
+            setTimeout(() => {
+              window.open(webFallback, '_blank');
+            }, 500);
+          }, 500);
+        }, 500);
         return;
       }
 
