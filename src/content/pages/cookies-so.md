@@ -19,3 +19,4 @@ Waa faylal yar oo qoraal ah oo lagu kaydiyo qalabkaaga si boggagu u shaqeeyaan. 
 ### Nala soo xiriir
 Su'aalo? Ku soo qor support@miftahsom.com.
 
+

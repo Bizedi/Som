@@ -122,3 +122,4 @@ The Quran emphasizes eating what is halal and tayyib (good and wholesome). This 
 Islamic principles of eating and nutrition offer timeless wisdom for healthy living. By following these teachings, Muslims can enjoy both physical health and spiritual fulfillment. The key is understanding that food is not just fuel for the body, but nourishment for the soul as well.
 
 May Allah guide us to eat in ways that please Him and benefit our health and well-being. Ameen.
+

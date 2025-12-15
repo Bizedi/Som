@@ -77,3 +77,4 @@ Dhaqanka Soomaaliga, quraacdu waxay inta badan ku jirtaa cuntooyinka dhaqanka si
 Waxaad ka dhigi kartaa cuntooyinkan dhaqanka mid casri ah adoo ku daraya walxo nafaqo leh sida rooti dhamaystiran iyo miro cusub.
 
 Xusuusnow, furaha caadooyinka quraacda guusha leh ayaa ah joogteynta iyo ka dhigista mid ku raaxaysan carruurtaada. Ku bilow isbeddel yar oo ka dhiso halkaas.
+

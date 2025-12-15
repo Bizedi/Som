@@ -85,3 +85,4 @@ Dhaqanka Soomaaliga, waxbarashada nafaqada waxay ku dari kartaa cuntooyinka dhaq
 - Ilaha maxalliga ah: Barnaamijyada nafaqada bulshada
 
 Xusuusnow, baritaanka cuntada caafimaadka ah ayaa ah safar. Dulqaad la noqo naftaada iyo carruurtaada. Dadaallada yar yar ee joogtada ah ayaa horseedi doona isbeddelo wanaagsan oo waara.
+

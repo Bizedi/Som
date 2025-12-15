@@ -77,3 +77,4 @@ In Somali culture, breakfast often includes traditional foods like:
 You can modernize these traditional foods by adding nutritious elements like whole grains and fresh produce.
 
 Remember, the key to successful breakfast habits is consistency and making it enjoyable for your child. Start with small changes and build from there.
+

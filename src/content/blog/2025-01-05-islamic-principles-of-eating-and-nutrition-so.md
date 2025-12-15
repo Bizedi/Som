@@ -122,3 +122,4 @@ Qur'aanku wuxuu ku nuuxnuuxsadaa cunidda waxa halal ah iyo tayyib (wanaagsan oo 
 Mabaadi'da Islaamka ee cunidda iyo nafaqada waxay bixiyaan xikmad waarta oo loogu talagalay nolosha caafimaadka leh. Iyada oo la raacayo baritaankan, Muslimiintu waxay ku raaxaysan karaan caafimaadka jidhka iyo qancinta ruuxiga ah labadaba. Furaha ayaa ah fahamka in cuntadu aysan ahayn shidaal jidhka oo kaliya, laakiin nafaqo nafta sidoo kale.
 
 Eebbe ha inagu hanuuniyo inaan cunno siyaabo ku farxisa isaga oo faa'iido u leh caafimaadkayaga iyo wanaagga. Aamiin.
+

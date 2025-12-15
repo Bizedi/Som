@@ -54,6 +54,13 @@ const translations = {
     'related.teaching-excerpt': 'Practical strategies for educating kids about nutrition in an age-appropriate way.',
     'related.islamic-title': 'Islamic Principles of Eating and Nutrition',
     'related.islamic-excerpt': 'Explore how Islamic teachings guide us toward mindful and healthy eating habits.',
+
+    // Share functionality
+    'share.button': 'Share',
+    'share.title': 'Share this article',
+    'share.copy-link': 'Copy link',
+    'share.social-media': 'Share on social media',
+    'share.copied': 'Copied!',
     'articles.work-life-balance': 'Top 10 Countries for Work-Life Balance in 2025',
     'articles.work-life-balance-excerpt': 'Comprehensive analysis of nations that prioritize employee well-being, family time, and sustainable career growth.',
     'articles.islamic-values': 'Teaching Children About Islamic Values at Home',
@@ -155,6 +162,13 @@ const translations = {
     'related.teaching-excerpt': 'Istaraatiijiyooyin wax ku ool ah oo loogu talagalay baritaanka carruurta nafaqada si da\'da ku habboon.',
     'related.islamic-title': 'Mabaadi\'da Islaamka ee Cunidda iyo Nafaqada',
     'related.islamic-excerpt': 'Sahami sida baritaanka Islaamka ay inagu hagaan caadooyinka cuntada miyirka leh iyo caafimaadka.',
+
+    // Share functionality
+    'share.button': 'La wadaag',
+    'share.title': 'Maqaalkan la wadaag',
+    'share.copy-link': 'Nuqul link',
+    'share.social-media': 'Ku wadaag baraha bulshada',
+    'share.copied': 'La nuqulay!',
     
     // Common
     'common.search': 'Raadi maqaallo...',
