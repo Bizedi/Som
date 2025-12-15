@@ -93,21 +93,38 @@ const ArticlePage = () => {
   const shareOnWhatsApp = () => {
     try {
       const text = encodeURIComponent(`${shareText} ${shareUrl}`);
-      if (navigator.share && typeof navigator.share === 'function') {
-        navigator.share({ title: shareTitle, text: shareText, url: shareUrl }).catch(() => {
-          window.open(`https://wa.me/?text=${text}`, '_blank');
-        });
+      const ua = navigator.userAgent || '';
+      const isAndroid = /Android/i.test(ua);
+      const isiOS = /iPhone|iPad|iPod/i.test(ua);
+
+      if (isAndroid) {
+        const intentPrimary = `intent://send?text=${text}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
+        const intentBusiness = `intent://send?text=${text}#Intent;scheme=whatsapp;package=com.whatsapp.w4b;end`;
+        const webFallback = `https://wa.me/?text=${text}`;
+
+        // Try primary WhatsApp, then Business, then web fallback
+        window.location.href = intentPrimary;
+        setTimeout(() => {
+          window.location.href = intentBusiness;
+          setTimeout(() => {
+            window.open(webFallback, '_blank');
+          }, 450);
+        }, 450);
         return;
       }
-      // Attempt deep link to trigger app chooser (WhatsApp / WhatsApp Business)
-      const intentUrl = `whatsapp://send?text=${text}`;
-      const webFallback = `https://wa.me/?text=${text}`;
-      const opened = window.open(intentUrl, '_blank');
-      setTimeout(() => {
-        if (!opened || opened.closed) {
+
+      if (isiOS) {
+        const deep = `whatsapp://send?text=${text}`;
+        const webFallback = `https://wa.me/?text=${text}`;
+        window.location.href = deep;
+        setTimeout(() => {
           window.open(webFallback, '_blank');
-        }
-      }, 600);
+        }, 700);
+        return;
+      }
+
+      // Desktop / other platforms
+      window.open(`https://wa.me/?text=${text}`, '_blank');
     } catch (error) {
       console.error('Error sharing on WhatsApp:', error);
     }
