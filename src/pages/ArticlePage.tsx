@@ -3,9 +3,31 @@ import { useParams } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import Sidebar from '@/components/Sidebar';
 import ArticleCard from '@/components/ArticleCard';
-import { Calendar, User, Share2, Facebook, Twitter, Linkedin, MessageCircle, ChevronDown } from 'lucide-react';
+import { Calendar, User, Share2, Facebook, Linkedin, Copy, Check, ChevronDown } from 'lucide-react';
 import { useTranslation } from '@/contexts/TranslationContext';
 import { loadBlogPosts, type BlogPost } from '@/lib/contentLoader';
+
+const WhatsAppIcon = () => (
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 256 256"
+    className="w-4 h-4"
+    fill="currentColor"
+  >
+    <path d="M128 20a108 108 0 0 0-92.88 160l-7.4 37.36a8 8 0 0 0 9.56 9.4L74.52 219A108 108 0 1 0 128 20Zm0 200a92 92 0 0 1-46.8-12.94 8 8 0 0 0-4.08-1.12 8.21 8.21 0 0 0-1.58.16l-26.52 5.3 5.3-26.52a8 8 0 0 0-1-5.66A92 92 0 1 1 128 220Zm49-63.44c-2.94-1.46-17.38-8.56-20.06-9.54s-4.68-1.46-6.64 1.48-7.58 9.54-9.3 11.52-3.44 2-6.38.52-12.46-4.6-23.73-14.69c-8.78-7.84-14.7-17.52-16.42-20.46s-.18-4.54 1.28-6a55.73 55.73 0 0 0 3.74-5.38 5.37 5.37 0 0 0-.26-5.08c-.74-1.46-6.64-16-9.09-21.92-2.39-5.76-4.82-5-6.64-5.08s-3.62-.12-5.56-.12a10.7 10.7 0 0 0-7.72 3.6c-2.64 2.86-10.06 9.84-10.06 24s10.3 27.72 11.74 29.64 20.26 30.92 49 43.34a166.31 166.31 0 0 0 16.52 6.08c6.94 2.2 13.26 1.89 18.25 1.14 5.56-.82 17.12-7 19.53-13.82s2.41-12.6 1.69-13.82-2.66-1.88-5.6-3.34Z" />
+  </svg>
+);
+
+const XIcon = () => (
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 24 24"
+    className="w-4 h-4"
+    fill="currentColor"
+  >
+    <path d="M3.5 3h4.4l4.1 5.6L15.9 3H21l-6.1 7.5L21.3 21h-4.4l-4.5-6.2L7.3 21H3l6.3-7.6L3.5 3Zm2.16 1.5 3.62 5.04-6.01 7.26h1.77l5-6.02 4.37 6.02h1.91l-3.99-5.5L18.82 4.5h-1.75l-4.4 5.37L8.72 4.5H5.66Z" />
+  </svg>
+);
 
 const ArticlePage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -13,6 +35,7 @@ const ArticlePage = () => {
 
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -31,6 +54,23 @@ const ArticlePage = () => {
   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
   const shareTitle = article?.title || '';
   const shareText = `Check out this article: ${shareTitle}`;
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 2000);
+    } catch {
+      const textArea = document.createElement('textarea');
+      textArea.value = shareUrl;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 2000);
+    }
+  };
 
   const shareOnFacebook = () => {
     try {
@@ -52,8 +92,22 @@ const ArticlePage = () => {
 
   const shareOnWhatsApp = () => {
     try {
-      const url = `https://wa.me/?text=${encodeURIComponent(shareText + ' ' + shareUrl)}`;
-      window.open(url, '_blank');
+      const text = encodeURIComponent(`${shareText} ${shareUrl}`);
+      if (navigator.share && typeof navigator.share === 'function') {
+        navigator.share({ title: shareTitle, text: shareText, url: shareUrl }).catch(() => {
+          window.open(`https://wa.me/?text=${text}`, '_blank');
+        });
+        return;
+      }
+      // Attempt deep link to trigger app chooser (WhatsApp / WhatsApp Business)
+      const intentUrl = `whatsapp://send?text=${text}`;
+      const webFallback = `https://wa.me/?text=${text}`;
+      const opened = window.open(intentUrl, '_blank');
+      setTimeout(() => {
+        if (!opened || opened.closed) {
+          window.open(webFallback, '_blank');
+        }
+      }, 600);
     } catch (error) {
       console.error('Error sharing on WhatsApp:', error);
     }
@@ -78,20 +132,20 @@ const ArticlePage = () => {
       hover: 'hover:bg-[#1b44b5]',
     },
     {
-      id: 'twitter',
-      label: 'X / Twitter',
+      id: 'x',
+      label: 'X',
       onClick: shareOnTwitter,
-      icon: Twitter,
-      bg: 'bg-[#0ea5e9]',
-      hover: 'hover:bg-[#0284c7]',
+      icon: XIcon,
+      bg: 'bg-[#0f1419]',
+      hover: 'hover:bg-black',
     },
     {
       id: 'whatsapp',
       label: 'WhatsApp',
       onClick: shareOnWhatsApp,
-      icon: MessageCircle,
-      bg: 'bg-[#16a34a]',
-      hover: 'hover:bg-[#15803d]',
+      icon: WhatsAppIcon,
+      bg: 'bg-[#25d366]',
+      hover: 'hover:bg-[#1ebe5b]',
     },
     {
       id: 'linkedin',
@@ -100,6 +154,14 @@ const ArticlePage = () => {
       icon: Linkedin,
       bg: 'bg-[#0a66c2]',
       hover: 'hover:bg-[#0a58a8]',
+    },
+    {
+      id: 'copy',
+      label: t('share.copy-link'),
+      onClick: copyToClipboard,
+      icon: copySuccess ? Check : Copy,
+      bg: copySuccess ? 'bg-emerald-600' : 'bg-[#111827]',
+      hover: copySuccess ? 'hover:bg-emerald-600' : 'hover:bg-[#0b1220]',
     },
   ];
 
