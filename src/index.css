@@ -162,3 +162,175 @@ All colors MUST be HSL. Replicating exact spacing, typography, and layout.
     background: hsl(var(--aljazeera-blue));
   }
 }
+
+@layer components {
+  /* Al Jazeera-inspired share controls */
+  .share-toggle {
+    @apply inline-flex items-center gap-3 rounded-full border px-4 py-2.5 shadow-sm backdrop-blur-sm transition-all duration-200 hover:-translate-y-[2px] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-aljazeera-blue/40 bg-white text-[#0e1b2b] border-[#d6d6d6];
+  }
+
+  .share-toggle.is-active {
+    @apply ring-2 ring-[#0b304f]/20 shadow-lg;
+  }
+
+  .share-icon {
+    @apply relative flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-[#f5d774] to-[#f1c644] text-[#0f2a3d] shadow-sm transition-transform duration-200;
+  }
+
+  .share-icon::before {
+    content: "";
+    @apply absolute inset-0 rounded-full bg-white/35 opacity-90;
+  }
+
+  .share-icon::after {
+    content: "";
+    @apply absolute inset-0 rounded-full border border-white/30 opacity-0 transition-opacity duration-300 animate-[share-pulse_1.6s_ease-in-out_infinite];
+  }
+
+  .share-icon .lucide {
+    @apply relative z-10 transition-transform duration-200;
+  }
+
+  .share-toggle:active .share-icon,
+  .floating-share__button:active {
+    transform: scale(0.96);
+  }
+
+  .share-toggle.is-active .share-icon::after {
+    @apply opacity-100;
+  }
+
+  .share-toggle.is-active .share-icon .lucide {
+    @apply -rotate-12 scale-[1.08];
+  }
+
+  .share-label {
+    @apply flex flex-col leading-tight text-left;
+  }
+
+  .share-label__title {
+    @apply text-sm font-semibold text-[#0e1b2b];
+  }
+
+  .share-label__hint {
+    @apply text-[11px] text-[#506070] font-medium;
+  }
+
+  .share-chevron {
+    @apply ml-1 h-4 w-4 text-[#506070] transition-transform duration-200;
+  }
+
+  .share-inline {
+    @apply flex items-center gap-3 flex-wrap;
+  }
+
+  .share-inline__icons {
+    @apply flex items-center gap-2;
+  }
+
+  .share-inline__pill {
+    @apply h-9 w-9 rounded-full text-white flex items-center justify-center shadow-sm transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-aljazeera-blue/30;
+  }
+
+  .share-popover {
+    animation: share-pop 220ms ease-out;
+  }
+
+  .share-popover::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    right: 56px;
+    border-width: 0 8px 8px 8px;
+    border-style: solid;
+    border-color: transparent transparent #e7d594 transparent;
+  }
+
+  .share-popover::after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    right: 56px;
+    border-width: 0 7px 7px 7px;
+    border-style: solid;
+    border-color: transparent transparent #fefdf7 transparent;
+  }
+
+  .social-chip {
+    @apply flex items-center gap-3 rounded-xl px-3 py-2 text-white transition-all duration-200 shadow-sm hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-aljazeera-blue/30 border border-black/5;
+  }
+
+  .social-chip__icon {
+    @apply flex h-9 w-9 items-center justify-center rounded-full bg-white/20 text-white transition-colors duration-200 shadow-inner;
+  }
+
+  .social-chip:hover .social-chip__icon {
+    @apply bg-black/10 text-white;
+  }
+
+  .share-chip {
+    @apply inline-flex items-center gap-2 rounded-md px-3 py-2 text-white transition-all duration-200 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-aljazeera-blue/30;
+  }
+
+  .share-actions {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .social-pill {
+    @apply flex items-center gap-3 rounded-full px-3 py-2 text-white transition-all duration-200 shadow-sm hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-aljazeera-blue/30 border border-black/5;
+  }
+
+  .social-pill__icon {
+    @apply flex h-9 w-9 items-center justify-center rounded-full bg-black/10 text-white transition-colors duration-200;
+  }
+
+  .social-pill:hover .social-pill__icon {
+    @apply bg-black/20;
+  }
+
+  .social-pill__label {
+    @apply text-sm font-semibold;
+  }
+
+  .share-copy {
+    @apply flex gap-2 items-stretch;
+  }
+
+  .share-copy__input {
+    @apply flex-1 px-3 py-2 text-sm bg-card border border-border-light rounded-md text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-aljazeera-blue/30;
+  }
+
+  .share-copy__button {
+    @apply inline-flex items-center gap-2 rounded-md px-3 py-2 text-white bg-aljazeera-blue transition-all duration-200 shadow-sm hover:bg-aljazeera-blue/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-aljazeera-blue/30;
+  }
+
+  .share-copy__button.is-success {
+    @apply bg-emerald-600 hover:bg-emerald-600;
+  }
+}
+
+@keyframes share-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes share-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  60% {
+    transform: scale(1.15);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}

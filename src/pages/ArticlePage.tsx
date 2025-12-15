@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import Sidebar from '@/components/Sidebar';
 import ArticleCard from '@/components/ArticleCard';
-import { Calendar, User, Share2, Facebook, Twitter, Linkedin, Copy, Check, Link, MessageCircle } from 'lucide-react';
+import { Calendar, User, Share2, Facebook, Twitter, Linkedin, MessageCircle, ChevronDown } from 'lucide-react';
 import { useTranslation } from '@/contexts/TranslationContext';
 import { loadBlogPosts, type BlogPost } from '@/lib/contentLoader';
 
@@ -13,7 +13,6 @@ const ArticlePage = () => {
 
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [showShareModal, setShowShareModal] = useState(false);
-  const [copySuccess, setCopySuccess] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -26,47 +25,12 @@ const ArticlePage = () => {
     };
   }, [language]);
 
-  // Close share modal when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (showShareModal && !(event.target as Element).closest('.share-modal')) {
-        setShowShareModal(false);
-      }
-    };
-
-    if (showShareModal) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [showShareModal]);
-
   const article = useMemo(() => posts.find(p => p.slug === slug), [posts, slug]);
 
   // Share functionality
   const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
   const shareTitle = article?.title || '';
   const shareText = `Check out this article: ${shareTitle}`;
-
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(shareUrl);
-      setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 2000);
-    } catch (err) {
-      // Fallback for older browsers
-      const textArea = document.createElement('textarea');
-      textArea.value = shareUrl;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textArea);
-      setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 2000);
-    }
-  };
 
   const shareOnFacebook = () => {
     try {
@@ -103,6 +67,41 @@ const ArticlePage = () => {
       console.error('Error sharing on LinkedIn:', error);
     }
   };
+
+  const socialPlatforms = [
+    {
+      id: 'facebook',
+      label: 'Facebook',
+      onClick: shareOnFacebook,
+      icon: Facebook,
+      bg: 'bg-[#1d4ed8]',
+      hover: 'hover:bg-[#1b44b5]',
+    },
+    {
+      id: 'twitter',
+      label: 'X / Twitter',
+      onClick: shareOnTwitter,
+      icon: Twitter,
+      bg: 'bg-[#0ea5e9]',
+      hover: 'hover:bg-[#0284c7]',
+    },
+    {
+      id: 'whatsapp',
+      label: 'WhatsApp',
+      onClick: shareOnWhatsApp,
+      icon: MessageCircle,
+      bg: 'bg-[#16a34a]',
+      hover: 'hover:bg-[#15803d]',
+    },
+    {
+      id: 'linkedin',
+      label: 'LinkedIn',
+      onClick: shareOnLinkedIn,
+      icon: Linkedin,
+      bg: 'bg-[#0a66c2]',
+      hover: 'hover:bg-[#0a58a8]',
+    },
+  ];
 
   if (!article) {
     return (
@@ -187,95 +186,40 @@ const ArticlePage = () => {
               </div>
 
               {/* Share Button */}
-              <div className="relative">
+              <div className="share-inline">
                 <button
                   onClick={() => setShowShareModal(!showShareModal)}
-                  className="flex items-center gap-2 px-3 py-1.5 text-text-secondary hover:text-blue-600 hover:bg-blue-50 transition-colors rounded-md border border-border-light"
+                  aria-pressed={showShareModal}
+                  aria-expanded={showShareModal}
+                  data-active={showShareModal}
+                  className={`share-toggle group ${showShareModal ? 'is-active' : ''}`}
                   aria-label={t('share.title')}
                 >
-                  <Share2 className="w-4 h-4" />
-                  <span className="text-sm font-medium">{t('share.button')}</span>
+                  <span className="share-icon group-hover:scale-105" aria-hidden="true">
+                    <Share2 className="w-4 h-4" />
+                  </span>
+                  <div className="share-label">
+                    <span className="share-label__title">{t('share.button')}</span>
+                    <span className="share-label__hint">{t('article.share')}</span>
+                  </div>
+                  <ChevronDown className={`share-chevron ${showShareModal ? 'rotate-180' : ''}`} aria-hidden="true" />
                 </button>
 
-                {/* Share Modal */}
                 {showShareModal && (
-                  <div className="share-modal absolute right-0 top-full mt-2 w-72 max-w-[calc(100vw-2rem)] bg-background border border-border-light rounded-large shadow-lg p-4 z-50">
-                    <div className="flex items-center justify-between mb-3">
-                      <h4 className="font-medium text-foreground">{t('share.title')}</h4>
-                      <button
-                        onClick={() => setShowShareModal(false)}
-                        className="text-text-secondary hover:text-foreground"
-                      >
-                        ×
-                      </button>
-                    </div>
-
-                    {/* Copy Link Section */}
-                    <div className="mb-4">
-                      <div className="flex items-center gap-2 mb-2">
-                        <Link className="w-4 h-4 text-text-secondary" />
-                        <span className="text-sm font-medium">{t('share.copy-link')}</span>
-                      </div>
-                      <div className="flex gap-2">
-                        <input
-                          type="text"
-                          value={shareUrl}
-                          readOnly
-                          className="flex-1 px-3 py-2 text-sm bg-card border border-border-light rounded text-foreground"
-                        />
+                  <div className="share-inline__icons" role="group" aria-label={t('share.social-media')}>
+                    {socialPlatforms.map((platform) => {
+                      const Icon = platform.icon;
+                      return (
                         <button
-                          onClick={copyToClipboard}
-                          className="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors flex items-center gap-1"
+                          key={platform.id}
+                          onClick={platform.onClick}
+                          className={`share-inline__pill ${platform.bg} ${platform.hover}`}
+                          aria-label={`Share on ${platform.label}`}
                         >
-                          {copySuccess ? (
-                            <>
-                              <Check className="w-4 h-4" />
-                              <span className="text-sm">{t('share.copied')}</span>
-                            </>
-                          ) : (
-                            <>
-                              <Copy className="w-4 h-4" />
-                              <span className="text-sm">{t('share.copy-link')}</span>
-                            </>
-                          )}
+                          <Icon className="w-4 h-4" />
                         </button>
-                      </div>
-                    </div>
-
-                    {/* Social Media Buttons */}
-                    <div>
-                      <span className="text-sm font-medium text-text-secondary mb-3 block">{t('share.social-media')}</span>
-                      <div className="grid grid-cols-2 gap-2">
-                        <button
-                          onClick={shareOnFacebook}
-                          className="flex items-center gap-2 px-3 py-2 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded transition-colors"
-                        >
-                          <Facebook className="w-4 h-4" />
-                          Facebook
-                        </button>
-                        <button
-                          onClick={shareOnTwitter}
-                          className="flex items-center gap-2 px-3 py-2 text-sm bg-blue-400 hover:bg-blue-500 text-white rounded transition-colors"
-                        >
-                          <Twitter className="w-4 h-4" />
-                          Twitter
-                        </button>
-                        <button
-                          onClick={shareOnWhatsApp}
-                          className="flex items-center gap-2 px-3 py-2 text-sm bg-green-600 hover:bg-green-700 text-white rounded transition-colors"
-                        >
-                          <MessageCircle className="w-4 h-4" />
-                          WhatsApp
-                        </button>
-                        <button
-                          onClick={shareOnLinkedIn}
-                          className="flex items-center gap-2 px-3 py-2 text-sm bg-blue-700 hover:bg-blue-800 text-white rounded transition-colors"
-                        >
-                          <Linkedin className="w-4 h-4" />
-                          LinkedIn
-                        </button>
-                      </div>
-                    </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -292,24 +236,6 @@ const ArticlePage = () => {
               </div>
             )}
 
-            {/* Social Share Bar - Floating Left */}
-            <div className="hidden lg:block fixed left-8 top-1/2 transform -translate-y-1/2 z-10">
-              <div className="flex flex-col gap-3 bg-background border border-border-light rounded-large p-3 shadow-sm">
-                <button className="p-2 text-text-secondary hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
-                  <Facebook className="w-5 h-5" />
-                </button>
-                <button className="p-2 text-text-secondary hover:text-blue-400 hover:bg-blue-50 rounded transition-colors">
-                  <Twitter className="w-5 h-5" />
-                </button>
-                <button className="p-2 text-text-secondary hover:text-blue-700 hover:bg-blue-50 rounded transition-colors">
-                  <Linkedin className="w-5 h-5" />
-                </button>
-                <button className="p-2 text-text-secondary hover:text-aljazeera-blue hover:bg-aljazeera-blue/10 rounded transition-colors">
-                  <Share2 className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-
             {/* Article Content */}
             <div 
               className="prose prose-lg max-w-none whitespace-pre-wrap"
@@ -319,24 +245,6 @@ const ArticlePage = () => {
                 fontSize: '1.125rem'
               }}
             />
-
-            {/* Mobile Social Share */}
-            <div className="lg:hidden mt-8 pt-6 border-t border-border-light">
-              <div className="flex items-center justify-center gap-4">
-                <span className="text-text-secondary text-sm font-medium">{t('article.share')}:</span>
-                <div className="flex gap-3">
-                  <button className="p-2 text-text-secondary hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">
-                    <Facebook className="w-5 h-5" />
-                  </button>
-                  <button className="p-2 text-text-secondary hover:text-blue-400 hover:bg-blue-50 rounded transition-colors">
-                    <Twitter className="w-5 h-5" />
-                  </button>
-                  <button className="p-2 text-text-secondary hover:text-blue-700 hover:bg-blue-50 rounded transition-colors">
-                    <Linkedin className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-            </div>
 
             {/* Author Bio */}
             <div className="mt-12 p-6 bg-card-hover rounded-large border border-card-border">
