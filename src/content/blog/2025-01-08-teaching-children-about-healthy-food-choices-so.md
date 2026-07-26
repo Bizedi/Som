@@ -1,9 +1,10 @@
 ---
 title: Baritaanka Carruurta Ku Saabsan Doorashooyinka Cuntada Caafimaadka
 date: 2025-01-08T09:00:00.000Z
-image: /images/hero-parenting.jpg
+image: /images/1000_f_145653134_mr7metelf1dv2lnynrrtzq1ftm58vndh.jpg
 category: Barbaarinta Carruurta
-excerpt: Istaraatiijiyooyin wax ku ool ah oo loogu talagalay baritaanka carruurta nafaqada si da'da ku habboon.
+excerpt: Istaraatiijiyooyin wax ku ool ah oo loogu talagalay baritaanka
+  carruurta nafaqada si da'da ku habboon.
 author: P. A. Sadik Mohamed
 readTime: 7 daqiiqo oo akhris
 language: so
